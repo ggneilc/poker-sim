@@ -1,28 +1,65 @@
 body {
     color: white;
     background-color: black;
+
     height: 100vh;
+    width: 100vw;
+    margin: 0rem;
+    overflow: hidden;
 }
 
 header {
     display: flex;
     height: 40px;
-    background-color: grey; 
+    background-color: #222222; 
 }
 
 main {
+    background-color: #111111;
+    background-image: url("../images/landing-page-background.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
     display: flex;
-    background-image: url("../images/landing-page-background.jpg");
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80%;
+    height: 90vh;
+    margin: 0rem
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #222222;
 }
 
 #userinfo-box {
-    flex: auto;
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    flex: 5;
+
+    background-color: #101010;
+
+    margin: 20px;
+    width: 500px;
+    border-radius: 20px;
 }
 
+#startgame {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: green;
+    margin: 20px;
+    width: 350px;
+
+    border-radius: 20px;
+}
 
