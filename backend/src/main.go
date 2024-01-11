@@ -2,6 +2,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/ggneilc/poker-sim/src/controller"
 	"github.com/gofiber/fiber/v2"
 )
@@ -13,5 +15,5 @@ func main() {
 
 	controller.SetupRoutes(app)
 
-	app.Listen(":3000")
+	log.Fatal(app.Listen(":3000"))
 }
