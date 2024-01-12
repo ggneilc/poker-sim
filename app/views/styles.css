@@ -1,0 +1,79 @@
+body {
+    color: white;
+    background-color: black;
+
+    height: 100vh;
+    width: 100vw;
+    margin: 0rem;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    height: 40px;
+    background-color: #222222; 
+}
+
+ul {
+    list-style-type: none;
+    margin: 5px;
+}
+
+main {
+    background-color: #111111;
+    background-image: url("../images/landing-page-background.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+    margin: 0rem
+}
+
+footer {
+    display: flex;
+    background-color: #222222;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#userinfo-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 5;
+
+    background-color: #101010;
+    border: 1px solid white;
+
+    margin: 20px;
+    width: 500px;
+    border-radius: 20px;
+}
+
+form > input { 
+    margin: 10px;
+    height: 20px;
+    border-radius: 20px;
+}
+
+#startgame {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: green;
+    margin: 20px;
+    width: 350px;
+
+    border-radius: 20px;
+}
+
