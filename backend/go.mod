@@ -7,6 +7,9 @@ require (
 	github.com/fasthttp/websocket v1.5.7 // indirect
 	github.com/gofiber/contrib/websocket v1.3.0 // indirect
 	github.com/gofiber/fiber/v2 v2.52.0 // indirect
+	github.com/gofiber/template v1.8.2 // indirect
+	github.com/gofiber/template/html/v2 v2.1.0 // indirect
+	github.com/gofiber/utils v1.1.0 // indirect
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect

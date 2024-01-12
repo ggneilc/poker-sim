@@ -7,8 +7,12 @@
 </head>
 <body>
 
+    {{template "partials/header" .}}
+
     <h1> Welcome </h1>
-    <p> to the home screen </p>
+    <p> to the home screen, {{.Username}} </p>
+
+    {{template "partials/footer" .}}
     
 </body>
 </html>

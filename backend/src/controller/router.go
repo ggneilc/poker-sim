@@ -13,10 +13,13 @@ import (
 func SetupRoutes(app *fiber.App) {
 
 	app.Get("/home", displayHome)
+	app.Post("/home", displayHome)
+
 	app.Get("/new", generateGame)
 	app.Get("/ws/:id", websocket.New(establishWebsocket))
 }
 
+//how tf does this actually work -> to create game state
 func establishWebsocket(c *websocket.Conn) {
 	// c.Locals is added to the *websocket.Conn
 	log.Println(c.Locals("allowed"))  // true
@@ -45,7 +48,12 @@ func establishWebsocket(c *websocket.Conn) {
 }
 
 func displayHome(c *fiber.Ctx) error {
-	return c.SendFile("../public/home.html", false)
+
+	username := c.FormValue("username")
+
+	return c.Render("home", fiber.Map{
+		"Username": username,
+	})
 }
 
 func generateGame(c *fiber.Ctx) error {

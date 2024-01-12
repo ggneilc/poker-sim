@@ -24,16 +24,18 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: 90vh;
     margin: 0rem
 }
 
 footer {
     display: flex;
-    align-items: center;
-    justify-content: start;
     background-color: #222222;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 #userinfo-box {
@@ -44,9 +46,16 @@ footer {
     flex: 5;
 
     background-color: #101010;
+    border: 1px solid white;
 
     margin: 20px;
     width: 500px;
+    border-radius: 20px;
+}
+
+form > input { 
+    margin: 10px;
+    height: 20px;
     border-radius: 20px;
 }
 
