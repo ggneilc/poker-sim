@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> {{.Username}} GameRoom</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     {{template "partials/header" .}}
 
-    <h1> Welcome </h1>
-    <p> to the home screen, {{.Username}} </p>
+    <main>
+        <h1> Welcome </h1>
+        <p> to the <strong>Game</strong>, {{.Username}} </p>
+    </main>
 
     {{template "partials/footer" .}}
     

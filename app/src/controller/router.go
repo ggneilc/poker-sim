@@ -10,6 +10,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+type User struct {
+	Username string
+	Password string
+}
+
+var testUser User
+
 func SetupRoutes(app *fiber.App) {
 
 	app.Get("/home", displayHome)
@@ -50,6 +57,7 @@ func establishWebsocket(c *websocket.Conn) {
 func displayHome(c *fiber.Ctx) error {
 
 	username := c.FormValue("username")
+	testUser.Username = username
 
 	return c.Render("home", fiber.Map{
 		"Username": username,
@@ -72,6 +80,7 @@ func generateGame(c *fiber.Ctx) error {
 		gameId = gameId + nums[r1.Intn(9)]
 	}
 
-	return c.SendFile("../../frontend/game.html", false)
-
+	return c.Render("game", fiber.Map{
+		"Username": testUser.Username,
+	})
 }

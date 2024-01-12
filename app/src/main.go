@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	// Create a new engine
+	// Create a new view engine
 	engine := html.New("../views", ".html")
 
 	app := fiber.New(fiber.Config{
@@ -28,7 +28,7 @@ func main() {
 		return fiber.ErrUpgradeRequired
 	})
 
-	app.Static("/", "../../frontend")
+	app.Static("/", "../views")
 
 	controller.SetupRoutes(app)
 

@@ -14,6 +14,11 @@ header {
     background-color: #222222; 
 }
 
+ul {
+    list-style-type: none;
+    margin: 5px;
+}
+
 main {
     background-color: #111111;
     background-image: url("../images/landing-page-background.jpeg");
