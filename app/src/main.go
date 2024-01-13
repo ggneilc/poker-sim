@@ -28,7 +28,9 @@ func main() {
 		return fiber.ErrUpgradeRequired
 	})
 
+	//serve static files at index/ & game/ (SSR & styles/script)
 	app.Static("/", "../views")
+	app.Static("/game", "../views")
 
 	controller.SetupRoutes(app)
 
