@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameRoom</title>
+    <link rel="stylesheet" href="game-styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <button class="logo">
+                *GOPOKER
+            </button>
+
+            <div class="menucontainer">
+                <button class="menu">
+                    =
+                </button>
+            </div>
+        </div>
+        
+    
+        <div class="gamecontainer">
+            <div class="seat">
+                <p>{{.Username}}</p>
+                <p>{{.money}}</p>
+            </div>
+    
+            <div class="pokertable">
+                <div class="felt">
+                    
+                </div>
+            </div>
+        </div>
+    
+        <div class="bottom">
+            <div class="chat">
+                <div class="chatbox">
+                    <p class="chatmessage">
+                        {{.Username}}: W
+                    </p>
+                    <p class="chatmessage">
+                        {{.Username}}: Nigger
+                    </p>
+                </div>
+                <div class="chatbar">
+                    <input type="text" placeholder="Your Message (press enter to send)">
+                </div>
+            </div>
+    
+            <div class="pokerhand">
+                hand
+            </div>
+    
+            <div class="ledger">
+                ledger/gamestats
+            </div>
+        </div>
+    </div>
+</body>
+</html>

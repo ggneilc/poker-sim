@@ -11,7 +11,7 @@ body {
 header {
     display: flex;
     height: 40px;
-    background-color: #222222; 
+    background-color: #383838; 
 }
 
 ul {
@@ -21,7 +21,7 @@ ul {
 
 main {
     background-color: #111111;
-    background-image: url("../images/landing-page-background.jpeg");
+    background-image: url("../../images/good-landing-page-background.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -35,7 +35,7 @@ main {
 
 footer {
     display: flex;
-    background-color: #222222;
+    background-color: #383838;
 }
 
 form {
@@ -50,8 +50,8 @@ form {
     justify-content: center;
     flex: 5;
 
-    background-color: #101010;
-    border: 1px solid white;
+    background-color: #383838;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.8);
 
     margin: 20px;
     width: 500px;
@@ -70,10 +70,11 @@ form > input {
     align-items: center;
     justify-content: center;
 
-    background-color: green;
+    background-color: #7ABF6F;
     margin: 20px;
-    width: 350px;
+    width: 500px;
 
     border-radius: 20px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.8);
 }
 

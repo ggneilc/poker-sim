@@ -1,0 +1,176 @@
+body {
+    background-color: #111111;
+    background-image: url("../../images/good-landing-page-background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    height: 100vh;
+    width: 100vw;
+    margin: 0rem;
+    overflow: hidden;
+
+    font-family: 'JetBrains Mono', monospace;
+    color: #ffffff
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: 50px repeat(10, 1fr);
+
+    height: 100vh;
+    width: 100vw;
+}
+
+.top {
+    display: grid;
+    grid-column: 1 / 16;
+    grid-row: 1 / 2;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+}
+
+.gamecontainer {
+    display: grid;
+    grid-column: 1 / 16;
+    grid-row: 2 / 9;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+}
+
+.bottom {
+    display: grid;
+    grid-column: 1 / 16;
+    grid-row: 9 / 12;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+}
+
+/* .top items */
+.logo {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: #383838;
+    border-bottom-right-radius: 25px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #ffffff
+}
+
+.menucontainer {
+    grid-column: 14 / 16;
+
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    
+    background-color: #383838;
+    border-bottom-left-radius: 25px;
+}
+
+.menu {
+    background-color: #666666;
+}
+
+/* .bottom items */
+
+/* .gamecontainer items */
+.seat {
+    grid-column: 8 / 9;
+    grid-row: 2 / 3;
+
+    background-color: #383838;
+    border-radius: 50%;
+}
+
+.pokertable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    grid-column: 5 / 12;
+    grid-row: 4 / 7;
+
+    background-color: #383838;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgb(0, 0, 0);
+}
+
+.felt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 90%;
+    width: 100%;
+    position: relative;
+    bottom: 10px;
+
+    background: radial-gradient(circle, #7ABF6F, #528a49);
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgb(0, 0, 0);
+}
+
+/* Chat items */
+.chat{
+    grid-column: 1 / 4;
+    grid-row: 1 / 4;
+    
+    background-color: #383838;
+    border-top-right-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbox {
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+}
+
+.chatmessage {
+    background-color: #666666;
+    padding: 10px;
+    font-size: small;
+    border-radius: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.chatbar {
+    height: 15%;
+    display: flex;
+}
+
+/* Pokerhand items */
+.pokerhand {
+    grid-column: 5 / 12;
+    grid-row: 1 / 4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: #383838;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+/* Ledger items */
+.ledger {
+    grid-column: 13 / 16;
+    grid-row: 1 / 4;
+
+    display: flex;
+    justify-content: right;
+    
+    background-color: #383838;
+    border-top-left-radius: 25px;
+}
