@@ -1,17 +1,23 @@
+:root {
+    --main-color1: #1b1d26;
+    --main-color2: #202020;
+    --felt-color: radial-gradient(circle, #eb9fef, #03254e);
+}
+
 body {
-    background-color: #111111;
-    background-image: url("../../images/good-landing-page-background.jpg");
+    background: radial-gradient(circle, #110E1c, #202020);
+    /* background-image: url("../../images/good-landing-page-background.jpg"); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-
+    
     height: 100vh;
     width: 100vw;
     margin: 0rem;
     overflow: hidden;
 
     font-family: 'JetBrains Mono', monospace;
-    color: #ffffff
+    color: #ffffff;
 }
 
 .container {
@@ -56,7 +62,7 @@ body {
     align-items: center;
     justify-content: center;
     
-    background-color: #383838;
+    background-color: var(--main-color1);
     border-bottom-right-radius: 25px;
     font-family: 'JetBrains Mono', monospace;
     color: #ffffff
@@ -69,12 +75,12 @@ body {
     justify-content: center;
     padding: 5px;
     
-    background-color: #383838;
+    background-color: var(--main-color1);
     border-bottom-left-radius: 25px;
 }
 
 .menu {
-    background-color: #666666;
+    background-color: var(--main-color2);
 }
 
 /* .bottom items */
@@ -82,9 +88,9 @@ body {
 /* .gamecontainer items */
 .seat {
     grid-column: 8 / 9;
-    grid-row: 2 / 3;
+    grid-row: 1 / 2;
 
-    background-color: #383838;
+    background-color: var(--main-color1);
     border-radius: 50%;
 }
 
@@ -94,11 +100,11 @@ body {
     justify-content: center;
 
     grid-column: 5 / 12;
-    grid-row: 4 / 7;
+    grid-row: 3 / 7;
 
-    background-color: #383838;
+    background-color: var(--main-color2);
     border-radius: 50%;
-    box-shadow: 0 3px 10px rgb(0, 0, 0);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.555);
 }
 
 .felt {
@@ -109,9 +115,9 @@ body {
     height: 90%;
     width: 100%;
     position: relative;
-    bottom: 10px;
+    bottom: 30px;
 
-    background: radial-gradient(circle, #7ABF6F, #528a49);
+    background: var(--felt-color);
     border-radius: 50%;
     box-shadow: 0 3px 10px rgb(0, 0, 0);
 }
@@ -120,12 +126,14 @@ body {
 .chat{
     grid-column: 1 / 4;
     grid-row: 1 / 4;
+    margin-left: 20px;
+    margin-bottom: 20px;
     
-    background-color: #383838;
-    border-top-right-radius: 25px;
-
+    background-color: var(--main-color1);
     display: flex;
     flex-direction: column;
+    border-radius: 20px;
+    box-shadow: -8px 5px 5px rgb(0, 0, 0, .5);
 }
 
 .chatbox {
@@ -137,7 +145,7 @@ body {
 }
 
 .chatmessage {
-    background-color: #666666;
+    background-color: var(--main-color2);
     padding: 10px;
     font-size: small;
     border-radius: 25px;
@@ -145,32 +153,38 @@ body {
 }
 
 .chatbar {
+    background-color: var(--main-color2);
     height: 15%;
     display: flex;
+    border-radius: 25px;
 }
 
 /* Pokerhand items */
 .pokerhand {
     grid-column: 5 / 12;
     grid-row: 1 / 4;
+    margin-bottom: 20px;
 
     display: flex;
     align-items: center;
     justify-content: center;
     
-    background-color: #383838;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    box-shadow: 0px 5px 5px rgb(0, 0, 0, .5);
 }
 
 /* Ledger items */
 .ledger {
     grid-column: 13 / 16;
     grid-row: 1 / 4;
+    margin-right: 20px;
+    margin-bottom: 20px;
 
     display: flex;
     justify-content: right;
     
-    background-color: #383838;
-    border-top-left-radius: 25px;
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    box-shadow: 8px 5px 5px rgb(0, 0, 0, .5);
 }
