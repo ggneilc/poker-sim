@@ -1,11 +1,12 @@
 :root {
-    --main-color1: #1b1d26;
+    --main-color1: #262831;
     --main-color2: #202020;
     --felt-color: radial-gradient(circle, #eb9fef, #03254e);
+    --background-gradientcolor: radial-gradient(circle, #110E1c, #202020);
 }
 
 body {
-    background: radial-gradient(circle, #110E1c, #202020);
+    background: var(--background-gradientcolor);
     /* background-image: url("../../images/good-landing-page-background.jpg"); */
     background-repeat: no-repeat;
     background-position: center;
@@ -57,30 +58,33 @@ body {
 .logo {
     grid-column: 1 / 3;
     grid-row: 1 / 2;
+    margin-top: 20px;
+    margin-left: 20px;
 
     display: flex;
     align-items: center;
     justify-content: center;
     
     background-color: var(--main-color1);
-    border-bottom-right-radius: 25px;
+    border-radius: 20px;
     font-family: 'JetBrains Mono', monospace;
-    color: #ffffff
+    color: #ffffff;
+    box-shadow: -8px 5px 5px rgb(0, 0, 0, .5);
 }
 
-.menucontainer {
+.menu {
     grid-column: 14 / 16;
+    margin-top: 20px;
+    margin-right: 20px;
 
     display: flex;
     justify-content: center;
     padding: 5px;
     
     background-color: var(--main-color1);
-    border-bottom-left-radius: 25px;
-}
-
-.menu {
-    background-color: var(--main-color2);
+    border-radius: 20px;
+    box-shadow: 8px 5px 5px rgb(0, 0, 0, .5);
+    color: #ffffff;
 }
 
 /* .bottom items */
@@ -148,7 +152,7 @@ body {
     background-color: var(--main-color2);
     padding: 10px;
     font-size: small;
-    border-radius: 25px;
+    border-radius: 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -156,7 +160,7 @@ body {
     background-color: var(--main-color2);
     height: 15%;
     display: flex;
-    border-radius: 25px;
+    border-radius: 20px;
 }
 
 /* Pokerhand items */
