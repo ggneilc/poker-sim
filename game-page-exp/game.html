@@ -6,26 +6,160 @@
     <title>GameRoom</title>
     <link rel="stylesheet" href="game-styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
     <div class="container">
         <div class="top">
             <button class="logo">
-                *GOPOKER
+                <span class="material-symbols-outlined">
+                    monetization_on
+                </span>
+                GOPOKER
+            </button>
+
+            <!-- Make into templates -->
+            <button class="away">
+                <span class="material-symbols-outlined">
+                    airline_seat_recline_extra
+                </span>
+            </button>
+
+            <button class="pause">
+                <span class="material-symbols-outlined">
+                    play_pause
+                </span>
             </button>
 
             <button class="menu">
-                =
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
             </button>
         </div>
         
     
         <div class="gamecontainer">
-            <div class="seat">
-                <p>{{.Username}}</p>
-                <p>{{.money}}</p>
+            <div class="seat1">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
             </div>
-    
+
+            <div class="seat2">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat3">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat4">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat5">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+            
+            <div class="seat6">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat7">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat8">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat9">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
             <div class="pokertable">
                 <div class="felt">
                     
@@ -43,9 +177,7 @@
                         {{.Username}}: Hello
                     </p>
                 </div>
-                <div class="chatbar">
-                    <input type="text" placeholder="Your Message (press enter to send)">
-                </div>
+                <input class="chatbar" type="text" placeholder="Your Message (press enter to send)">
             </div>
     
             <div class="pokerhand">

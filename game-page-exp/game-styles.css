@@ -21,6 +21,23 @@ body {
     color: #ffffff;
 }
 
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #ffffff;
+}
+
+input {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: var(--main-color2);
+    border: 1px solid var(--main-color2);
+    color: #ffffff;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(15, 1fr);
@@ -60,44 +77,258 @@ body {
     grid-row: 1 / 2;
     margin-top: 20px;
     margin-left: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
     
     background-color: var(--main-color1);
-    border-radius: 20px;
-    font-family: 'JetBrains Mono', monospace;
-    color: #ffffff;
     box-shadow: -8px 5px 5px rgb(0, 0, 0, .5);
 }
 
-.menu {
-    grid-column: 14 / 16;
+.away {
+    grid-column: 13 / 14;
     margin-top: 20px;
     margin-right: 20px;
-
-    display: flex;
-    justify-content: center;
     padding: 5px;
     
     background-color: var(--main-color1);
-    border-radius: 20px;
     box-shadow: 8px 5px 5px rgb(0, 0, 0, .5);
-    color: #ffffff;
 }
 
-/* .bottom items */
+.pause {
+    grid-column: 14 / 15;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding: 5px;
+    
+    background-color: var(--main-color1);
+    box-shadow: 8px 5px 5px rgb(0, 0, 0, .5);
+}
 
-/* .gamecontainer items */
-.seat {
-    grid-column: 8 / 9;
-    grid-row: 1 / 2;
+.menu {
+    grid-column: 15 / 16;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding: 5px;
+    
+    background-color: var(--main-color1);
+    box-shadow: 8px 5px 5px rgb(0, 0, 0, .5);
+}
+
+/* Seat items */
+.seat1 {
+    grid-column: 4 / 5;
+    grid-row: 6 / 7;
+    width: 6vw;
+    height: 4vw;
 
     background-color: var(--main-color1);
-    border-radius: 50%;
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
 }
 
+.seat2 {
+    grid-column: 3 / 4;
+    grid-row: 4 / 5;
+    width: 6vw;
+    height: 4vw;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
+}
+
+.seat3 {
+    grid-column: 4 / 5;
+    grid-row: 2 / 3;
+    width: 6vw;
+    height: 4vw;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
+}
+
+.seat4 {
+    grid-column: 6 / 7;
+    grid-row: 1 / 2;
+    width: 6vw;
+    height: 4vw;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
+}
+
+.seat5 {
+    grid-column: 8 / 9;
+    grid-row: 1 / 2;
+    width: 6vw;
+    height: 4vw;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
+}
+
+.seat6 {
+    grid-column: 10 / 11;
+    grid-row: 1 / 2;
+    width: 6vw;
+    height: 4vw;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
+}
+
+.seat7 {
+    grid-column: 12 / 13;
+    grid-row: 2 / 3;
+    width: 6vw;
+    height: 4vw;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
+}
+
+.seat8 {
+    grid-column: 13 / 14;
+    grid-row: 4 / 5;
+    width: 6vw;
+    height: 4vw;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
+}
+
+.seat9 {
+    grid-column: 12 / 13;
+    grid-row: 6 / 7;
+    width: 6vw;
+    height: 4vw;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: small;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+
+    /* Turn Color      */
+    /* box-shadow: 0 3px 20px rgb(255, 255, 255); */
+
+    /* Win Color      */
+    /* box-shadow: 0 3px 20px rgb(253, 228, 0); */
+}
+
+.seatname {
+    position: relative;
+    bottom: 10px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15%;
+
+    background: var(--felt-color);
+    border-radius: 20px;
+}
+
+.seatmoney {
+    margin: .5em;
+
+    background: var(--felt-color);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.seathandcontainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25vw;
+}
+
+.card1 {
+    width: 2vw;
+    height: 3vw;
+
+    background-color: #fff4f4;
+    padding-left: 2px;
+    color: #000000;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card2 {
+    width: 2vw;
+    height: 3vw;
+
+    background-color: #fff4f4;
+    padding-left: 2px;
+    color: #000000;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Table items */
 .pokertable {
     display: flex;
     align-items: center;
@@ -108,7 +339,7 @@ body {
 
     background-color: var(--main-color2);
     border-radius: 50%;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.555);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 .felt {
@@ -128,7 +359,7 @@ body {
 
 /* Chat items */
 .chat{
-    grid-column: 1 / 4;
+    grid-column: 1 / 5;
     grid-row: 1 / 4;
     margin-left: 20px;
     margin-bottom: 20px;
@@ -146,26 +377,29 @@ body {
     flex-direction: column;
     align-items: start;
     justify-content: end;
+
+    overflow: auto;
 }
 
 .chatmessage {
+    padding: 7px;
+    margin-top: 2px;
+    margin-left: 5px;
+
     background-color: var(--main-color2);
-    padding: 10px;
     font-size: small;
     border-radius: 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 .chatbar {
-    background-color: var(--main-color2);
     height: 15%;
-    display: flex;
-    border-radius: 20px;
+    border-radius: 10px;   
 }
 
 /* Pokerhand items */
 .pokerhand {
-    grid-column: 5 / 12;
+    grid-column: 6 / 11;
     grid-row: 1 / 4;
     margin-bottom: 20px;
 
@@ -180,7 +414,7 @@ body {
 
 /* Ledger items */
 .ledger {
-    grid-column: 13 / 16;
+    grid-column: 12 / 16;
     grid-row: 1 / 4;
     margin-right: 20px;
     margin-bottom: 20px;
