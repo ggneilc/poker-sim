@@ -44,116 +44,80 @@
     
         <div class="gamecontainer">
             <div class="seat1">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
-                </div>   
+                </div>
             </div>
 
             <div class="seat2">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
-                </div>   
+                </div>  
             </div>
 
             <div class="seat3">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
-                </div>   
+                </div>
             </div>
 
             <div class="seat4">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
-                </div>   
+                </div>
             </div>
 
             <div class="seat5">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
-                </div>   
+                </div>
             </div>
             
             <div class="seat6">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
-                </div>   
+                </div>
             </div>
 
             <div class="seat7">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
-                </div>   
+                </div>
             </div>
 
             <div class="seat8">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
-                </div>   
+                </div>
             </div>
 
             <div class="seat9">
-                <div class="seatname">
-                    Logan
-                </div>
-                <div class="seatmoney">
-                    35.50
-                </div>
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
                     <div class="card1"></div>
                     <div class="card2"></div>
@@ -162,7 +126,14 @@
 
             <div class="pokertable">
                 <div class="felt">
-                    
+                    <div class="boardcontainer">
+                        <div class="tablecard">A</div>
+                        <div class="tablecard">2</div>
+                        <div class="tablecard">4</div>
+                        <div class="tablecard" style="background: radial-gradient(circle, #293865 50%, var(--main-color1));"></div>
+                        <div class="tablecard" style="background: radial-gradient(circle, #293865 50%, var(--main-color1));"></div>
+                    </div>
+                    <div class="pot">{{.pot}}</div>
                 </div>
             </div>
         </div>
@@ -198,6 +169,11 @@
                             <button class="raise">RAISE</button>
                             <button class="fold">FOLD</button>
                         </div>
+                    </div>
+                </div>
+                <div class="timer">
+                    <div class="timerprogress">
+                        
                     </div>
                 </div>
             </div>

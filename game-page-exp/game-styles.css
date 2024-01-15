@@ -1,6 +1,7 @@
 :root {
     --main-color1: #262831;
     --main-color2: #202020;
+    --label-color: linear-gradient(#eb9fef, #03254e);
     --felt-color: radial-gradient(circle, #eb9fef, #03254e);
     --background-gradientcolor: radial-gradient(circle, #110E1c, #202020);
 }
@@ -134,6 +135,9 @@ input {
     grid-row: 6 / 7;
     width: 6vw;
     height: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -152,6 +156,9 @@ input {
     grid-row: 4 / 5;
     width: 6vw;
     height: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -170,6 +177,9 @@ input {
     grid-row: 2 / 3;
     width: 6vw;
     height: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -188,6 +198,9 @@ input {
     grid-row: 1 / 2;
     width: 6vw;
     height: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -208,6 +221,9 @@ input {
     height: 4vw;
     position: relative;
     bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -226,6 +242,9 @@ input {
     grid-row: 1 / 2;
     width: 6vw;
     height: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -244,6 +263,9 @@ input {
     grid-row: 2 / 3;
     width: 6vw;
     height: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -262,6 +284,9 @@ input {
     grid-row: 4 / 5;
     width: 6vw;
     height: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -280,6 +305,9 @@ input {
     grid-row: 6 / 7;
     width: 6vw;
     height: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     background-color: var(--main-color1);
     border-radius: 20px;
@@ -302,21 +330,23 @@ input {
     justify-content: center;
     height: 15%;
 
-    background: var(--felt-color);
+    background: var(--label-color);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
+    white-space: nowrap;
 }
 
 .seatmoney {
     margin: .5em;
+    padding: 5px;
 
-    background: var(--felt-color);
+    background: var(--label-color);
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 .seathandcontainer {
-    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -334,7 +364,7 @@ input {
     background-color: #fff4f4; color: #000000; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 
     /* Card Hidden */
-    background-color: #a53333; box-shadow: 0px 3px 10px rgba(0, 0, 0);
+    background: radial-gradient(circle, #293865 50%, var(--main-color1)); box-shadow: 0px 3px 10px rgba(0, 0, 0);
 
     padding-left: 2px;
     border-radius: 5px;
@@ -350,7 +380,7 @@ input {
     background-color: #fff4f4; color: #000000; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 
     /* Card Hidden */
-    background-color: #a53333; box-shadow: 0px 3px 10px rgba(0, 0, 0);
+    background: radial-gradient(circle, #293865 50%, var(--main-color1)); box-shadow: 0px 3px 10px rgba(0, 0, 0);
 
     padding-left: 2px;
     border-radius: 5px;
@@ -374,6 +404,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     height: 90%;
     width: 100%;
@@ -383,6 +414,43 @@ input {
     background: var(--felt-color);
     border-radius: 50%;
     box-shadow: 0 3px 10px rgb(0, 0, 0);
+}
+
+.boardcontainer {
+    position: relative;
+    top: 1vw;
+    width: 80%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.tablecard {
+    height: 100%;
+    width: 15%;
+
+    background-color: #fff4f4;
+    box-shadow: -5px 3px 10px rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    font-size: 2vw;
+    padding-left: 2px;
+    color: #000000;
+    
+}
+
+.pot {
+    position: relative;
+    top: 1.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5vw;
+    opacity: .8;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: 1vw;
 }
 
 /* Chat items */
@@ -429,7 +497,6 @@ input {
 .playercontainer {
     grid-column: 6 / 11;
     grid-row: 1 / 4;
-    padding: 10px;
 
     display: flex;
     flex-direction: column;
@@ -450,21 +517,24 @@ input {
 .playerinfocontainer {
     position: relative;
     bottom: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: auto;
+    height: 10%;
     padding: .5vw;
 
-    background: var(--felt-color);
+    background: var(--label-color);
     border-radius: 20px;
-    text-align: center;
     font-size: small;
 }
 
 .playeroptionscontainer {
     display: flex;
     flex-direction: row;
-    height: 100%;
+    height: 70%;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 1em;
 }
 
 .playerhandcontainer {
@@ -480,7 +550,7 @@ input {
 
 .playercard1 {
     width: 6vw;
-    height: auto;   
+    height: 100%;   
 
     background-color: #fff4f4;
     padding-left: 2px;
@@ -491,7 +561,7 @@ input {
 
 .playercard2 {
     width: 6vw;
-    height: auto;
+    height: 100%;
     position: relative;
     right: 10px;
 
@@ -507,7 +577,7 @@ input {
     width: 80%;
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
+    padding: .5em;
 }
 
 .button1-2 {
@@ -559,6 +629,27 @@ input {
     background-color: var(--main-color2);
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0);
+}
+
+.timer {
+    width: 100%;
+    height: 1em;
+    margin-top: 1em;
+
+    background-color: var(--main-color2);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.timerprogress {
+    width: 75%;
+    height: 100%;
+
+    background: linear-gradient(to left, #eb9fef, #03254e);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    text-align: center;
 }
 
 /* Ledger items */
