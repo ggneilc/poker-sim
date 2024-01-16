@@ -141,15 +141,23 @@
         <div class="bottom">
             <div class="chat">
                 <div class="chatbox">
-                    <p class="chatmessage">
+                    <div class="chatmessage">
                         {{.Username}}: W
-                    </p>
-                    <p class="chatmessage">
-                        {{.Username}}: Hello
-                    </p>
+                    </div>
+                    <div class="chatmessage">
+                        {{.Username}}: W
+                    </div>
+                    <div class="chatmessage">
+                        {{.Username}}: W
+                    </div>
+                    <div class="chatmessage">
+                        {{.Username}}: W
+                    </div>
+                    
                 </div>
                 <input class="chatbar" type="text" placeholder="Your Message (press enter to send)">
             </div>
+            
     
             <div class="playercontainer">
                 <div class="playerinfocontainer">
@@ -179,7 +187,44 @@
             </div>
     
             <div class="ledger">
-                ledger/gamestats
+                <div class="ledgerheader">
+                    <div class="namecolumn">NAME</div>
+                    <div class="buyincolumn">BUY-IN</div>
+                    <div class="stackcolumn">STACK</div>
+                    <div class="netcolumn">NET</div>
+                </div>
+                <div class="ledgerlog">
+                    <div class="namecolumn">Logan</div>
+                    <div class="buyincolumn">10000.00</div>
+                    <div class="stackcolumn">50000.00</div>
+                    <div class="netcolumn" style="color: green;">+40000.00</div>
+                </div>
+                <div class="ledgerlog">
+                    <div class="namecolumn">{{.Username}}</div>
+                    <div class="buyincolumn">{{.buyIn}}</div>
+                    <div class="stackcolumn">{{.Money}}</div>
+                    <div class="netcolumn">{{.netMoney}}</div>
+                </div>
+                <div class="ledgerlog">
+                    <div class="namecolumn">{{.Username}}</div>
+                    <div class="buyincolumn">{{.buyIn}}</div>
+                    <div class="stackcolumn">{{.Money}}</div>
+                    <div class="netcolumn">{{.netMoney}}</div>
+                </div>
+                <div class="ledgerlog">
+                    <div class="namecolumn">{{.Username}}</div>
+                    <div class="buyincolumn">{{.buyIn}}</div>
+                    <div class="stackcolumn">{{.Money}}</div>
+                    <div class="netcolumn">{{.netMoney}}</div>
+                </div>
+                <div class="ledgerlog">
+                    <div class="namecolumn">{{.Username}}</div>
+                    <div class="buyincolumn">{{.buyIn}}</div>
+                    <div class="stackcolumn">{{.Money}}</div>
+                    <div class="netcolumn">{{.netMoney}}</div>
+                </div>
+                
+                
             </div>
         </div>
     </div>
