@@ -27,6 +27,7 @@ button {
     align-items: center;
     justify-content: center;
     
+    background: var(--main-color2);
     border-radius: 20px;
     border: #ffffff;
     font-family: 'JetBrains Mono', monospace;
@@ -39,7 +40,7 @@ button:active {
 }
 
 button:hover {
-    background-color: #ffffff;
+    background: #ffffff;
     color: #000000;
 }
 
@@ -129,6 +130,156 @@ input {
     box-shadow: 8px 5px 5px rgb(0, 0, 0, .5);
 }
 
+.menuscreen {
+    grid-column: 2 / 15;
+    grid-row: 2 / 11;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    z-index: 1000;
+
+    background: var(--main-color1);
+    box-shadow: 0 5px 10px rgb(0, 0, 0, .5);
+    border-radius: 20px;
+}
+
+.menuscreenheader {
+    grid-column: 1 / 14;
+    grid-row: 1 / 2;
+}
+
+/* Table items */
+.pokertable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    grid-column: 5 / 12;
+    grid-row: 3 / 7;
+
+    background-color: var(--main-color2);
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.popupmessage {
+    position: absolute;
+    z-index: 999;
+    width: 40%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1vw;
+    white-space: nowrap;
+
+    background: var(--main-color2);
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+.popupmessage {
+    position: absolute;
+    z-index: 999;
+    width: 30%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vw;
+
+    background: var(--main-color1);
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    border-radius: 20px;
+    font-size: 1vw;
+}
+
+.popupmessagecontainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50%;
+    padding-top: .5vw;
+}
+
+.gamelink {
+    padding: .5vw;
+
+    background: var(--label-color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0);
+}
+
+.confirm {
+    padding: .5vw;
+
+    background-color: var(--main-color2);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .75);
+}
+
+.cancel {
+    padding: .5vw;
+    
+    background-color: var(--main-color2);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .75);
+}
+
+.felt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    height: 90%;
+    width: 100%;
+    position: relative;
+    bottom: 30px;
+
+    background: var(--felt-color);
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgb(0, 0, 0);
+}
+
+.boardcontainer {
+    position: relative;
+    top: 1vw;
+    width: 80%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.tablecard {
+    height: 100%;
+    width: 15%;
+
+    background-color: #fff4f4;
+    box-shadow: -5px 3px 10px rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    font-size: 2vw;
+    padding-left: 2px;
+    color: #000000;
+    
+}
+
+.pot {
+    position: relative;
+    top: 1.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5vw;
+    opacity: .8;
+
+    background-color: var(--main-color1);
+    border-radius: 20px;
+    font-size: 1vw;
+}
+
 /* Seat items */
 .seat1 {
     grid-column: 4 / 5;
@@ -149,6 +300,17 @@ input {
 
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
+}
+.seat1action {
+    position: relative;
+    bottom: 8vw;
+    left: 7vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
 }
 
 .seat2 {
@@ -171,6 +333,17 @@ input {
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
 }
+.seat2action {
+    position: relative;
+    bottom: 5vw;
+    left: 7vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
+}
 
 .seat3 {
     grid-column: 4 / 5;
@@ -192,6 +365,17 @@ input {
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
 }
+.seat3action {
+    position: relative;
+    bottom: 1vw;
+    left: 5.5vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
+}
 
 .seat4 {
     grid-column: 6 / 7;
@@ -212,6 +396,17 @@ input {
 
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
+}
+.seat4action {
+    position: relative;
+    top: 1vw;
+    left: 1vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
 }
 
 .seat5 {
@@ -236,6 +431,16 @@ input {
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
 }
+.seat5action {
+    position: relative;
+    top: .75vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
+}
 
 .seat6 {
     grid-column: 10 / 11;
@@ -256,6 +461,17 @@ input {
 
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
+}
+.seat6action {
+    position: relative;
+    top: 1vw;
+    right: 1vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
 }
 
 .seat7 {
@@ -278,6 +494,17 @@ input {
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
 }
+.seat7action {
+    position: relative;
+    bottom: 1vw;
+    right: 5.5vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
+}
 
 .seat8 {
     grid-column: 13 / 14;
@@ -299,6 +526,17 @@ input {
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
 }
+.seat8action {
+    position: relative;
+    bottom: 5vw;
+    right: 7vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
+}
 
 .seat9 {
     grid-column: 12 / 13;
@@ -319,6 +557,17 @@ input {
 
     /* Win Color      */
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
+}
+.seat9action {
+    position: relative;
+    bottom: 8vw;
+    right: 7vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
 }
 
 .seatname {
@@ -386,73 +635,6 @@ input {
     border-radius: 5px;
 }
 
-/* Table items */
-.pokertable {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    grid-column: 5 / 12;
-    grid-row: 3 / 7;
-
-    background-color: var(--main-color2);
-    border-radius: 50%;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-}
-
-.felt {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    height: 90%;
-    width: 100%;
-    position: relative;
-    bottom: 30px;
-
-    background: var(--felt-color);
-    border-radius: 50%;
-    box-shadow: 0 3px 10px rgb(0, 0, 0);
-}
-
-.boardcontainer {
-    position: relative;
-    top: 1vw;
-    width: 80%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.tablecard {
-    height: 100%;
-    width: 15%;
-
-    background-color: #fff4f4;
-    box-shadow: -5px 3px 10px rgba(0, 0, 0, 0.8);
-    border-radius: 5px;
-    font-size: 2vw;
-    padding-left: 2px;
-    color: #000000;
-    
-}
-
-.pot {
-    position: relative;
-    top: 1.5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: .5vw;
-    opacity: .8;
-
-    background-color: var(--main-color1);
-    border-radius: 20px;
-    font-size: 1vw;
-}
-
 /* Chat items */
 .chat{
     grid-column: 1 / 5;
@@ -499,7 +681,7 @@ input {
 .chatbar {
     border-radius: 10px; 
     padding: .5vw;
-    position: relative;
+    position: sticky;
     outline: none;
 }
 
@@ -528,6 +710,50 @@ input {
     /* box-shadow: 0 0 3vw 1vw #a88eb7; background-color: #a88eb7; */
 }
 
+.newplayercontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+}
+
+.nicknamebar {
+    width: 70%;
+    padding: .5vw;
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, .5);
+}
+
+.buyinbar {
+    width: 70%;
+    padding: .5vw;
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, .5);
+}
+
+.sitdown {
+    padding: .5vw;
+
+    background: var(--label-color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, .5);
+}
+
+.playeraction {
+    position: absolute;
+    bottom: 17vw;
+    padding: .5vw;
+
+    background: #fff4f4;
+    font-size: medium;
+    color: #000000;
+    border-radius: 20px;
+}
+
 .playerinfocontainer {
     position: relative;
     bottom: 2vw;
@@ -549,6 +775,42 @@ input {
     height: 70%;
     width: 100%;
     margin-bottom: 1em;
+}
+
+.raisescreencontainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 70%;
+    width: 100%;
+    /* margin-bottom: 1em; */
+
+    font-size: large;
+}
+
+.subraisecontainer {
+    width: 60%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: .25vw;
+    padding: .5vw;
+
+    background-color: var(--main-color2);
+    border-radius: 20px;
+}
+
+.raiseinput {
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+.raisebutton {
+    background: var(--main-color2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .75);
 }
 
 .playerhandcontainer {
@@ -584,6 +846,16 @@ input {
     color: #000000;
     border-radius: 5px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+.showhand {
+    position: absolute;
+    padding: .5vw;
+    bottom: 1vw;
+
+    background: var(--main-color2);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .playerbuttons {
@@ -672,8 +944,7 @@ input {
     grid-row: 1 / 4;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* Rows will be based on playercount */
-    grid-template-rows: 15% repeat(1, 3vw);
+    grid-template-rows: 15%;
     margin-right: 20px;
     margin-bottom: 20px;
 
