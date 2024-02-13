@@ -3,19 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {{.Username}} GameRoom</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>GameRoom</title>
+    <link rel="stylesheet" href="game-styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
 </head>
 <body>
+    <div class="container">
+        <div class="top">
+            <a href="/">
+            <button class="logo">
+                <span class="material-symbols-outlined">
+                    monetization_on
+                </span>
+                GOPOKER {{.playerCount}}
+            </button></a>
 
-    {{template "partials/header" .}}
+            <!-- Make into templates -->
+            <button class="away">
+                <span class="material-symbols-outlined">
+                    airline_seat_recline_extra
+                </span>
+            </button>
 
-    <main>
-        <h1> Welcome </h1>
-        <p> to the <strong>Game</strong>, {{.Username}} </p>
-    </main>
+            <button class="pause">
+                <span class="material-symbols-outlined">
+                    play_pause
+                </span>
+            </button>
 
-    {{template "partials/footer" .}}
+            <button class="menu">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+        </div>
+        
     
+        <div class="gamecontainer">
+            <div class="seat1">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat2">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat3">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat4">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat5">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+            
+            <div class="seat6">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat7">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat8">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="seat9">
+                <div class="seatname">
+                    Logan
+                </div>
+                <div class="seatmoney">
+                    35.50
+                </div>
+                <div class="seathandcontainer">
+                    <div class="card1">A</div>
+                    <div class="card2">K</div>
+                </div>   
+            </div>
+
+            <div class="pokertable">
+                <div class="felt">
+                    
+                </div>
+            </div>
+        </div>
+    
+        <div class="bottom">
+
+            <!-- Chat Container (Websocket) -->
+            <div class="chat" hx-ext="ws" ws-connect="/ws/game/{{.roomID}}">
+                <div id="chat_room" class="chatbox">
+
+                </div>
+                <form id="form" ws-send>
+                    <input class="chatbar" name="chat_message" type="text" placeholder="Your Message (press enter to send)">
+                    <input type="submit">
+                </form>
+            </div>
+
+    
+            <div class="pokerhand">
+                hand
+                {{.Money}}
+            </div>
+    
+            <div class="ledger">
+                ledger/gamestats
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
