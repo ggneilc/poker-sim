@@ -44,3 +44,15 @@ class Card:
         num = random.randint(1, 13) #randint is inclusive
         suit = random.randint(1,4)
         return Card(num, suit)
+
+class Deck:
+    def __init__(self): 
+        self.count = 52
+        self.cards = []
+    
+    def deal(self):
+        pass
+
+    def shuffle(self):
+        pass
+
