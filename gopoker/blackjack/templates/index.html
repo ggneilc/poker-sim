@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GoPoker</title>
+    <link href="{% static 'blackjack/styles.css' %}" rel="stylesheet">
+    <!-- htmx script install -->
+    <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.js" integrity="sha384-Xh+GLLi0SMFPwtHQjT72aPG19QvKB8grnyRbYBNIdHWc2NkCrz65jlU7YrzO6qRp" crossorigin="anonymous"></script>
+  </head>
+  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <nav>
+      <h1> gopoker </h1>
+    </nav>
+
+    <main>
+      <div class="main-grid">
+        <h1 class="main-child"> welcome to blackjack </h1>
+
+        <div id="card">
+        </div>
+
+        <div class="player-action">
+          <button hx-post="{% url 'hit' %}" hx-target="#card" hx-swap="beforeend"> Hit </button
+        </div>
+
+        <form class="player-action" method="post">
+          {% csrf_token %}
+          <button type="submit"> stand </button
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <p> copyright </p>
+    </footer>
+  </body>
+</html>
