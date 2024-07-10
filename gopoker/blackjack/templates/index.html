@@ -18,11 +18,14 @@
       <div class="main-grid">
         <h1 class="main-child"> welcome to blackjack </h1>
 
-        <div id="card">
+        <div id="card-holder">
+          <ul id="cards">
+
+          </ul>
         </div>
 
         <div class="player-action">
-          <button hx-post="{% url 'hit' %}" hx-target="#card" hx-swap="beforeend"> Hit </button
+          <button hx-post="{% url 'hit' %}" hx-target="#cards" hx-swap="beforeend"> Hit </button
         </div>
 
         <form class="player-action" method="post">

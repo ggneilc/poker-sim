@@ -36,9 +36,21 @@ body {
   grid-column-start: 3;
 }
 
-#card {
+#card-holder {
+  grid-column: 2 / 5;
   grid-row-start: 2;
-  grid-column-start: 2;
+}
+
+#cards {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+
+#card {
+  background-color: #fff;
+  padding: 5px;
+  margin: 5px;
 }
 
 button {
