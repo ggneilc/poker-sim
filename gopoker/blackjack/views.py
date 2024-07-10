@@ -3,7 +3,6 @@ from .utils import Card
 
 # Create your views here.
 
-
 # start the game on loading the page
 def index(request):
     return render(request, 'index.html')
