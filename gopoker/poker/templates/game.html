@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameRoom</title>
+    <link rel="stylesheet" href="../../static/poker/game-styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <button class="logo">
+                <span class="material-symbols-outlined">
+                    monetization_on
+                </span>
+                GOPOKER
+            </button>
+
+            <!-- Make into templates -->
+            <button class="away">
+                <span class="material-symbols-outlined">
+                    airline_seat_recline_extra
+                </span>
+            </button>
+
+            <button class="start-stop">
+                <span class="material-symbols-outlined">
+                    start
+                    <!-- stop -->
+                </span>
+            </button>
+
+            <button class="pause">
+                <span class="material-symbols-outlined">
+                    play_pause
+                </span>
+            </button>
+
+            <button class="menu">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+        </div>
+        
+    
+        <div class="gamecontainer">
+            <div class="pokertable">
+                <div class="popupmessage">
+                    <!-- STOP GAME? -->
+                    PRESS ON THE LINK TO COPY AND SEND TO FRIENDS
+                    <div class="popupmessagecontainer">
+                        <!-- <button class="confirm">CONFIRM</button>
+                        <button class="cancel">CANCEL</button> -->
+                        <button class="gamelink">http://gopoker.gg/room/aaaaaaaaaaaaa</button>
+                    </div>
+                </div>
+                <div class="felt">
+                    <!-- <div class="boardcontainer">
+                        <div class="tablecard">A</div>
+                        <div class="tablecard">2</div>
+                        <div class="tablecard">4</div>
+                        <div class="tablecard" style="background: radial-gradient(circle, #293865 50%, var(--main-color1));"></div>
+                        <div class="tablecard" style="background: radial-gradient(circle, #293865 50%, var(--main-color1));"></div>
+                    </div>
+                    <div class="pot">{{.pot}}</div> -->
+                </div>
+            </div>
+
+            <!-- <div class="seat1">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat1action">CHECK</div>
+            </div> -->
+
+            <!-- <div class="seat2">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat2action">CHECK</div>
+            </div> -->
+
+            <!-- <div class="seat3">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat3action">CHECK</div>
+            </div> -->
+
+            <!-- <div class="seat4">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat4action">CHECK</div>
+            </div> -->
+
+            <!-- <div class="seat5">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat5action">CHECK</div>
+            </div> -->
+            
+            <!-- <div class="seat6">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat6action">CHECK</div>
+            </div> -->
+
+            <!-- <div class="seat7">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat7action">CHECK</div>
+            </div> -->
+
+            <!-- <div class="seat8">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat8action">CHECK</div>
+            </div> -->
+
+            <!-- <div class="seat9">
+                <div class="seatname">{{.Username}}</div>
+                <div class="seatmoney">{{.Money}}</div>
+                <div class="seathandcontainer">
+                    <div class="card1"></div>
+                    <div class="card2"></div>
+                </div>
+                <div class="seat9action">CHECK</div>
+            </div> -->
+
+            
+        </div>
+    
+        <div class="bottom">
+            <div class="chat">
+                <div class="chatbox">
+                    <!-- <div class="chatmessage">
+                        {{.Username}}: W
+                    </div>
+                    <div class="chatmessage">
+                        {{.Username}}: W
+                    </div>
+                    <div class="chatmessage">
+                        {{.Username}}: W
+                    </div>
+                    <div class="chatmessage">
+                        {{.Username}}: W
+                    </div> -->
+                    
+                </div>
+                <input class="chatbar" type="text" placeholder="Your Message (press enter to send)">
+            </div>
+            
+    
+            <div class="playercontainer">
+
+                <!-- <div class="newplayercontainer">
+                    <input class="nicknamebar" type="text" placeholder="Enter Nickname">
+                    <input class="buyinbar" type="text" placeholder="Enter Buy-in">
+                    <button class="sitdown">SIT DOWN</button>
+                </div> -->
+
+                <!-- <div class="playeraction">CHECK</div> -->
+                <div class="playerinfocontainer">
+                    {{.playerName}}: {{.playerMoney}}
+                </div>
+
+                <div class="playeroptionscontainer">
+                    <div class="playerhandcontainer">
+                        <div class="playercard1">7</div>
+                        <div class="playercard2">2</div>
+                        <button class="showhand">SHOW HAND</button>
+                    </div>
+                    <div class="playerbuttons">
+                        <div class="button1-2">
+                            <button class="call" disabled>CALL</button>
+                            <button class="check">CHECK</button>
+                        </div>
+                        <div class="button3-4">
+                            <button class="raise">RAISE</button>
+                            <button class="fold">FOLD</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="raisescreencontainer">
+                    <div class="subraisecontainer">
+                        <button class="raisebutton">
+                            <span class="material-symbols-outlined">
+                                remove
+                            </span>
+                        </button>
+                        <input class="raiseinput" type="text" placeholder="{{.raise}}">
+                        <button class="raisebutton">
+                            <span class="material-symbols-outlined">
+                                add
+                            </span>
+                        </button>
+                    </div>
+                    <div class="subraisecontainer">
+                        <button class="raisebutton">1/4</button>
+                        <button class="raisebutton">1/2</button>
+                        <button class="raisebutton">POT</button>
+                        <button class="raisebutton">ALL IN</button>
+                    </div>
+                    <div class="subraisecontainer" style="justify-content: space-evenly;">
+                        <button class="confirm">CONFIRM</button>
+                        <button class="cancel">CANCEL</button>
+                    </div>
+                </div> -->
+                
+                <!-- <div class="timer">
+                    <div class="timerprogress"></div>
+                </div> -->
+            </div>
+    
+            <div class="ledger">
+                <div class="ledgerheader">
+                    <div class="namecolumn">NAME</div>
+                    <div class="buyincolumn">BUY-IN</div>
+                    <div class="stackcolumn">STACK</div>
+                    <div class="netcolumn">NET</div>
+                </div>
+                <!-- <div class="ledgerlog">
+                    <div class="namecolumn">{{.Username}}</div>
+                    <div class="buyincolumn">{{.buyIn}}</div>
+                    <div class="stackcolumn">{{.Money}}</div>
+                    <div class="netcolumn">{{.netMoney}}</div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- <div class="menuscreen">
+            <div class="menuscreenheader">
+                <button>WAITING ROOM</button>
+                <button>SETTINGS</button>
+                <button>
+                    <span class="material-symbols-outlined">
+                        close
+                    </span>
+                </button>
+            </div>
+        </div> -->
+        
+    </div>
+</body>
+
+</html>
