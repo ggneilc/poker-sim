@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .utils import Card
+from utils import *
 
 # Create your views here.
 
@@ -9,15 +9,18 @@ def index(request):
 
 
 # hit to recieve another card
-def hit(request):
-    card = Card.newCard()
-    context = { 
-        "num": card.getNum(), 
-        "suit": card.getSuit(),
-        "card": card.toString()
-    }
-    return render(request, 'card.html', context)
+def startGame(request):
+    game.status = GameStatus.IN_PROGRESS
+    # This should initiate the gameplay loop
+    return render(request, 'start.html')
 
+def pauseGame(request):
+    game.status = GameStatus.PAUSED
+    return render(request, 'pause.hmtl')
+
+def stopGame(request):
+    game.status = GameStatus.STOPPED
+    return render(request, 'stop.hmtl')
 
 # moves action to dealer
 def stand(request):

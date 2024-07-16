@@ -157,7 +157,10 @@ class Game:
 
     def newHand(self):
         for x in self.players:
-            self.players_in_hand.append(x)    
+            self.players_in_hand.append(x)
+
+    def playerFold(self, player: Player):
+        self.players_in_hand.remove(player)
 
 """
 Next Steps:
@@ -171,26 +174,21 @@ Next Steps:
 if __name__ == "__main__":
 
     game = Game()
+    host = Player()
 
     # Player objects will most likely be kept in a global list but for now we will initialize them locally
-    p1 = Player()
-    p2 = Player()
-    p3 = Player()
-    game.newPlayer(p1)
-    game.newPlayer(p2)
-    game.newPlayer(p3)
+    # p1 = Player()
+    # p2 = Player()
+    # p3 = Player()
+    # game.newPlayer(p1)
+    # game.newPlayer(p2)
+    # game.newPlayer(p3)
 
-    if game.status == GameStatus.IN_PROGRESS:
-        deck = Deck()
-        deck.shuffle()
+    # if game.status == GameStatus.IN_PROGRESS:
+    #     deck = Deck()
+    #     deck.shuffle()
 
-        for x in game.players_in_hand:
-            for i in range(2):
-                x.recieveCard(deck.deal())
-
-
-    
-
-
-    print(p1.toString())
+    #     for x in game.players_in_hand:
+    #         for i in range(2):
+    #             x.recieveCard(deck.deal())
 

@@ -6,6 +6,10 @@
     --background-gradientcolor: radial-gradient(circle, #110E1c, #202020);
 }
 
+li {
+    list-style-type: none;
+}
+
 body {
     background: var(--background-gradientcolor);
     /* background-image: url("../../images/acid-bg-loop.gif"); */
