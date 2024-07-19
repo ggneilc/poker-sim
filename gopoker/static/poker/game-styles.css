@@ -6,6 +6,17 @@
     --background-gradientcolor: radial-gradient(circle, #110E1c, #202020);
 }
 
+.htmx-swapping {
+opacity: 0;
+transition: opacity 0.5s ease-out;
+}
+
+/* Style for the element after it has entered */
+.htmx-settled {
+opacity: 1;
+transition: opacity 0.5s ease-out;
+}
+
 li {
     list-style-type: none;
 }

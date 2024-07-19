@@ -1,27 +1,42 @@
 from django.shortcuts import render
-from utils import *
+from django.http import HttpResponse
+from . import utils
+
 
 # Create your views here.
 
 # start the game on loading the page
 def index(request):
+    # game.status = GameStatus.SETUP
+    # if player == host:
+    #   render(start and pause buttons)
     return render(request, 'game.html')
 
 
-# hit to recieve another card
+# Activated when start game button is clicked
+# Will populate the table felt
 def startGame(request):
-    game.status = GameStatus.IN_PROGRESS
+    # game.status = GameStatus.IN_PROGRESS
     # This should initiate the gameplay loop
-    return render(request, 'start.html')
+    context = {
+        'button': render(request, 'stop.html').content.decode(),
+        'board': render(request, 'felt.html').content.decode(),
+        'info': render(request, 'player_options.html').content.decode(),
+    }
+    return render(request, 'start.html', context)
+
 
 def pauseGame(request):
-    game.status = GameStatus.PAUSED
+    # game.status = GameStatus.PAUSED
     return render(request, 'pause.hmtl')
 
 def stopGame(request):
-    game.status = GameStatus.STOPPED
-    return render(request, 'stop.hmtl')
+    # game.status = GameStatus.STOPPED
+    return render(request, 'stop_game.html')
 
-# moves action to dealer
-def stand(request):
-    return render(request, 'game.html')
+
+# ---------------------------------------------------
+# Player action logic
+
+def raiseBet(request):
+    return render(request, 'raise.html')

@@ -23,5 +23,6 @@ from . import views
 urlpatterns = [
     path('',views.homepage, name="home"),
     path('blackjack/', include('blackjack.urls')),
+    path('poker/', include('poker.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

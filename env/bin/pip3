@@ -1,4 +1,4 @@
-#!/home/neilc/Projects/python-programs/poker-sim/env/bin/python
+#!/home/lmcdonald/poker-sim/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

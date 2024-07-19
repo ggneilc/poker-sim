@@ -1,11 +1,13 @@
-<!-- Inserted into 'pokertable' div -->
-<div class="felt">
-    <ul class="boardcontainer">
-        <li class="tablecard">A</li>
-        <li class="tablecard">2</li>
-        <li class="tablecard">4</li>
-        <li class="tablecard" style="background: radial-gradient(circle, #293865 50%, var(--main-color1));"></li>
-        <li class="tablecard" style="background: radial-gradient(circle, #293865 50%, var(--main-color1));"></li>
-    </ul>
-    <div class="pot">{{.pot}}</div>
+<button id="start-stop" class="start-stop" hx-swap-oob="true" hx-get="{% url 'stop' %}" hx-confirm="Are you sure?" hx-target="#pokertable" hx-swap="afterbegin transition:true">
+    {{ button|safe }}
+</button>
+<div id="pokertable" class="pokertable" hx-swap-oob="true">
+    {{ board|safe }}
 </div>
+<div id="playercontainer" class="playercontainer" hx-swap-oob="true">
+    {{ info|safe }}
+</div>
+
+
+
+
