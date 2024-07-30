@@ -130,11 +130,43 @@ class Player:
 """
 Next Steps:
 1. Create game object to keep track of game info
-1.5. write django index page that links to different games (apps)
-(this allows pretty much fully asynchronous work -> then just turn the card/player/deck classes into a python package)
 2. create views to use these methods
 3. write templates to display the toString()s
 """
+
+class Game:
+    '''Stores information relating to current bj game'''
+    def __init__(self):
+        self.players = []   # empty room
+        self.shoe = []      # no active decks
+        self.status = True  # open room 
+        self.action = None  # current player turn:
+                            # after dealer, new round starts 
+
+    def initShoe(self, x: int) -> None:
+        '''add decks to the shoe'''
+        self.shoe.clear()
+        for i in range(x):
+            deck = Deck()
+            self.shoe.append(deck.shuffle())
+
+    def addPlayer(self, p: 'Player') -> None:
+        self.players.append(p)
+
+    def removePlayer(self, p: 'Player') -> None:
+        self.players.pop(p)
+
+    def closeRoom(self):
+        self.status = False
+
+    def openRoom(self):
+        self.status = True
+
+    def startGame(self):
+        '''set action to first player'''
+        self.action = self.players[0]
+        self.closeRoom()
+
 
 if __name__ == "__main__":
     deck = Deck()

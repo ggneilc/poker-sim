@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .utils import Card
+from .import utils
+from blackjack.models import Player, Room
 
 # Create your views here.
 
@@ -7,10 +8,20 @@ from .utils import Card
 def index(request):
     return render(request, 'index.html')
 
+def start(request):
+    '''create player & room'''
+    username = request.POST.get('uname')
+    score = request.POST.get('buyin')
+    p = Player(name=username, score=score, outcome=0)
+    p.save()
+    context = {
+        'name': username,
+    }
+    return render(request, 'player.html', context)
 
 # hit to recieve another card
 def hit(request):
-    card = Card.newCard()
+    card = utils.Card.newCard()
     context = { 
         "num": card.getNum(), 
         "suit": card.getSuit(),
