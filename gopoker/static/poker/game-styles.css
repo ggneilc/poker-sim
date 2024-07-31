@@ -223,7 +223,7 @@ input {
 .popupmessagecontainer {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     width: 50%;
     padding-top: .5vw;
 }
