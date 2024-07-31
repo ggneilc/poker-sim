@@ -6,7 +6,7 @@ from blackjack.models import Player, Room
 
 # start the game on loading the page
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'blackjack/index.html')
 
 def start(request):
     '''create player & room'''
@@ -17,7 +17,7 @@ def start(request):
     context = {
         'name': username,
     }
-    return render(request, 'player.html', context)
+    return render(request, 'blackjack/player.html', context)
 
 # hit to recieve another card
 def hit(request):
@@ -27,9 +27,9 @@ def hit(request):
         "suit": card.getSuit(),
         "card": card.toString()
     }
-    return render(request, 'card.html', context)
+    return render(request, 'blackjack/card.html', context)
 
 
 # moves action to dealer
 def stand(request):
-    return render(request, 'index.html')
+    return render(request, 'blackjack/index.html')

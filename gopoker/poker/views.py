@@ -10,7 +10,7 @@ def index(request):
     # game.status = GameStatus.SETUP
     # if player == host:
     #   render(start and pause buttons)
-    return render(request, 'game.html')
+    return render(request, 'poker/game.html')
 
 
 # Activated when start game button is clicked
@@ -23,20 +23,20 @@ def startGame(request):
         'board': render(request, 'felt.html').content.decode(),
         'info': render(request, 'player_options.html').content.decode(),
     }
-    return render(request, 'start.html', context)
+    return render(request, 'poker/start.html', context)
 
 
 def pauseGame(request):
     # game.status = GameStatus.PAUSED
-    return render(request, 'pause.hmtl')
+    return render(request, 'poker/pause.hmtl')
 
 def stopGame(request):
     # game.status = GameStatus.STOPPED
-    return render(request, 'stop_game.html')
+    return render(request, 'poker/stop_game.html')
 
 
 # ---------------------------------------------------
 # Player action logic
 
 def raiseBet(request):
-    return render(request, 'raise.html')
+    return render(request, 'poker/raise.html')
