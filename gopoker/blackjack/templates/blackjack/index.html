@@ -18,12 +18,16 @@
       <div class="main-grid">
         <h1 class="main-child"> welcome to blackjack </h1> 
 
+        <div id="card-holder">
+          <div id="cards"></div>
+        </div>
+
         <div id="player" class="player-action">
           <input name="uname" placeholder="Enter Name:">
           <input name="buyin" placeholder="Buy-in:">
-          <button hx-post="{% url 'start' %}" hx-target="#player">
-            start </button
-        </form>
+          <button hx-post="{% url 'bj:start' %}" hx-target="#player" hx-include="closest div">
+            start </button>
+        </div>
 
 
       </div>

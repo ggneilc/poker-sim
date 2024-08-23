@@ -39,6 +39,7 @@ body {
 #card-holder {
   grid-column: 2 / 5;
   grid-row-start: 2;
+  list-style-type: none;
 }
 
 #cards {

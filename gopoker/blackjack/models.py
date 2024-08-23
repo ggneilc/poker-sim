@@ -1,4 +1,5 @@
 from django.db import models
+from .utils import Card
 
 # Create your models here.
 
@@ -15,12 +16,11 @@ class Room(models.Model):
         return str(self.id)+", "+self.name+" : "+self.status
 
 
-
 class Player(models.Model):
     name = models.CharField(max_length=100)
     score = models.IntegerField()
-    outcome = models.IntegerField() # 0 = False, 1 = True
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    outcome = models.IntegerField()  # 0 = False, 1 = True
+#    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     hand = None
 
     def __init__(self, *args, **kwargs):
@@ -31,13 +31,10 @@ class Player(models.Model):
         self.hand.append(card)
 
     def resetHand(self):
-        self.hand.clear()
-    
+        self.hand.clear
+
     def __str__(self):
         d = f"Score: {self.score}\nHand: "
         for x in self.hand:
             d = d + x.toString() + " "
         return d
-
-
-
