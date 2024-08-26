@@ -10,7 +10,7 @@ class Room(models.Model):
         "X": "Closed",
     }
     name = models.CharField(max_length=150)
-    status = models.CharField(max_length=1, choices=STATUSES)
+    status = models.CharField(max_length=1, choices=STATUSES, default="O")
 
     def __str__(self):
         return str(self.id)+", "+self.name+" : "+self.status
@@ -19,8 +19,10 @@ class Room(models.Model):
 class Player(models.Model):
     name = models.CharField(max_length=100)
     score = models.IntegerField()
-    outcome = models.IntegerField()  # 0 = False, 1 = True
-#    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    outcome = models.IntegerField(default=0)  # 0 = lose/false, 1 = win/true
+    room = models.ForeignKey(Room, on_delete=models.CASCADE,
+                             related_name="players",
+                             default=1)
     hand = None
 
     def __init__(self, *args, **kwargs):
@@ -34,7 +36,7 @@ class Player(models.Model):
         self.hand.clear
 
     def __str__(self):
-        d = f"Score: {self.score}\nHand: "
+        d = f"{self.id} Name: {self.name} \tScore: {self.score}\nHand: "
         for x in self.hand:
             d = d + x.toString() + " "
         return d

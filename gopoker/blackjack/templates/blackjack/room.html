@@ -16,17 +16,18 @@
 
     <main>
       <div class="main-grid">
-        <h1 class="main-child"> welcome to blackjack </h1> 
+        <h1 class="main-child"> welcome to {{ room.name }} </h1> 
 
         <div id="card-holder">
           <div id="cards"></div>
         </div>
 
-        <div id="name" class="player-action">
-          <input name="url" placeholder="Join friend:">
-          <input name="room" placeholder="Room Name:">
-          <button hx-post="{% url 'bj:create' %}" 
-            hx-include="closest div"> Start </button>
+
+        <div id="player" class="player-action">
+          <input name="uname" placeholder="Enter Name:">
+          <input name="buyin" placeholder="Buy-in:">
+          <button hx-post="{% url 'bj:join' room.id %}" hx-target="#player" hx-include="closest div">
+            join </button>
         </div>
 
 
