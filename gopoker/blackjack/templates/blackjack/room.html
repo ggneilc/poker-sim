@@ -24,7 +24,7 @@
 
 
         <div id="player" class="player-action">
-          <input name="uname" placeholder="Enter Name:">
+          <input name="uname" placeholder="Enter Name:" value="{{user.username}}">
           <input name="buyin" placeholder="Buy-in:">
           <button hx-post="{% url 'bj:join' room.id %}" hx-target="#player" hx-include="closest div">
             join </button>

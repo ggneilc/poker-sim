@@ -1,19 +1,18 @@
 from django.contrib import admin
+from .models import Player, Room
 
-from .models import BlackjackPlayer, BlackjackRoom
-
-admin.site.register(BlackjackPlayer)
+admin.site.register(Player)
 
 
 # Define the inline for Player model
 class PlayerInline(admin.TabularInline):
-    model = BlackjackPlayer
+    model = Player
     extra = 0  # No extra blank forms to be displayed
-    fields = ['name', 'score', 'outcome']  # Fields to display in the inline
+    fields = ['user', 'room']  # Fields to display in the inline
 
 
 # Register the Room model with the PlayerInline
-@admin.register(BlackjackRoom)
+@admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     inlines = [PlayerInline]
     list_display = ['id', 'name', 'status']

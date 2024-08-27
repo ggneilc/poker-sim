@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+	<nav>
+    <h1> welcome to gopoker </h1>
+	</nav>
+      {% if user.is_authenticated %}
+	<p> choose a game </p>
+	<ul style="list-style-type: none; display: flex;">
+		<li style="flex: 1; border:1px solid black; display:flex; justify-content: center;">	<a href="/blackjack">blackjack</a> </li>
+		<li style="flex: 1; border:1px solid black; display:flex; justify-content: center;">	<a href="/poker">poker</a> </li>
+		<li style="flex: 1; border:1px solid black; display:flex; justify-content: center;">	<a href="/craps">craps</a> </li>
+	</ul>
+  <main>
+    <div>
+        <p> Hello {{user.username}}</p>
+      {% else %}
+        <a href="/login">Login Here</a>
+        <a href="/register">Register</a>
+      {% endif %}
+    </div>
+  </main>
+  </body>
+</html>

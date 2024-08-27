@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
-from .import utils
-from blackjack.models import Player, Room
-
+from . import utils
+from blackjack.models import BlackjackPlayer, Room
+from django.contrib.auth.models import User
 
 # start the game on loading the page
 def index(request):
@@ -13,9 +13,10 @@ def index(request):
 def create_room(request):
     '''create new room at url'''
     room_id = request.POST.get('url')
+    user = request.user
     if not room_id:
         name = request.POST.get('room')
-        r = Room(name=name)
+        r = Room(host=user, name=name, game="BJ")
         r.save()
         response = JsonResponse({'status': 'success'})
         response['HX-Redirect'] = f'room/{r.id}'
@@ -39,12 +40,14 @@ def join_room(request, room_id):
     '''create player in room (sit down at table)'''
     room = Room.objects.get(pk=room_id)
     username = request.POST.get('uname')
-    score = request.POST.get('buyin')
-    p = Player(room=room, name=username, score=score, outcome=0)
+    buyin = request.POST.get('buyin')
+
+    u = User.objects.get(username=username)
+    p = BlackjackPlayer(user=u, room=room, chips=buyin)
     p.save()
     context = {
         'name': username,
-        'score': score,
+        'score': buyin,
     }
     return render(request, 'blackjack/player.html', context)
 

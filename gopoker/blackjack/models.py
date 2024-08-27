@@ -1,28 +1,15 @@
 from django.db import models
 from .utils import Card
+from core.models import Player, Room
 
 # Create your models here.
 
 
-class Room(models.Model):
-    STATUSES = {
-        "O": "Open",
-        "X": "Closed",
-    }
-    name = models.CharField(max_length=150)
-    status = models.CharField(max_length=1, choices=STATUSES, default="O")
+class BlackjackPlayer(Player):
+    chips = models.IntegerField(default=0)
+    has_blackjack = models.BooleanField(default=False)
+    current_hand_value = models.IntegerField(default=0)
 
-    def __str__(self):
-        return str(self.id)+", "+self.name+" : "+self.status
-
-
-class Player(models.Model):
-    name = models.CharField(max_length=100)
-    score = models.IntegerField()
-    outcome = models.IntegerField(default=0)  # 0 = lose/false, 1 = win/true
-    room = models.ForeignKey(Room, on_delete=models.CASCADE,
-                             related_name="players",
-                             default=1)
     hand = None
 
     def __init__(self, *args, **kwargs):
@@ -36,7 +23,13 @@ class Player(models.Model):
         self.hand.clear
 
     def __str__(self):
-        d = f"{self.id} Name: {self.name} \tScore: {self.score}\nHand: "
-        for x in self.hand:
-            d = d + x.toString() + " "
-        return d
+        return f"{super().__str__()} - Blackjack Score: {self.current_hand_value}"
+
+
+class BlackjackRoom(Room):
+    # Additional fields and methods specific to Blackjack rooms
+    deck = models.JSONField(default=list)
+    dealer_score = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{super().__str__()} - Dealer Score: {self.dealer_score}"
