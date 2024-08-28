@@ -7,6 +7,6 @@ urlpatterns = [
     path('create/', views.create_room, name='create'),
     path('room/<int:room_id>/', views.display_room, name="room"),
     path('room/<int:room_id>/join', views.join_room, name="join"),
-    path('hit/', views.hit, name='hit'),
-    path('stand/', views.stand, name='stand'),
+    path('room/<int:room_id>/hit/', views.hit, name='hit'),
+    path('room/<int:room_id>/stand/', views.stand, name='stand'),
 ]

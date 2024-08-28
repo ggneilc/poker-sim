@@ -21,7 +21,7 @@ class Room(models.Model):
     game = models.CharField(max_length=2, choices=GAMES, default="E")
 
     def __str__(self):
-        return f"{self.name} (Host: {self.host.name if self.host else 'No Host'}): {self.get_game_display()}, {self.get_status_display()} "
+        return f"{self.name} (Host: {self.host.user.username if self.host else 'No Host'}): {self.get_game_display()}, {self.get_status_display()} "
 
 
 class Player(models.Model):

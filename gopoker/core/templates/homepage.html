@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{% static 'homepage/styles.css' %}" rel="stylesheet">
   </head>
   <body>
 	<nav>
@@ -20,6 +21,7 @@
   <main>
     <div>
         <p> Hello {{user.username}}</p>
+        <a href="/logout">logout</a>
       {% else %}
         <a href="/login">Login Here</a>
         <a href="/register">Register</a>

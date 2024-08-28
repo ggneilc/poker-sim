@@ -5,12 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>login</title>
+  <!-- htmx script install -->
+  <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.js" integrity="sha384-Xh+GLLi0SMFPwtHQjT72aPG19QvKB8grnyRbYBNIdHWc2NkCrz65jlU7YrzO6qRp" crossorigin="anonymous"></script>
 </head>
-<body>
-  <form method="post">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Login</button>
-  </form>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <div>
+    <input name="username" placeholder="username">
+    <input name="password" placeholder="password">
+    <button hx-post="{% url 'login' %}" hx-include="closest div">Login</button>
+  </div>
 </body>
 </html>

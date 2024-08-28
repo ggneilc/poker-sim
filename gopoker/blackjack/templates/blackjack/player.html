@@ -1,7 +1,7 @@
 <div class="player-action">
 	{{name}} | {{score}}
   <div>
-    <button hx-post={% url 'bj:hit' %} hx-target="#cards" hx-swap="beforeend"> Hit </button>
-    <button> Stand </button>
+    <button hx-post={% url 'bj:hit' room.id %} hx-target="#player-cards" hx-swap="beforeend"> Hit </button>
+    <button hx-post={% url 'bj:stand' room.id %} hx-target="#dealer-cards" hx-swap="beforeend"> Stand </button>
   </div>
 </div>

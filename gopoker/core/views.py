@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegistrationForm
+from .models import Player
 
 
 def register(request):
@@ -21,5 +23,28 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request,
+                            username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = JsonResponse({'status': 'success'})
+            response['HX-Redirect'] = r'/'
+            return response
+    else:
+        return render(request, 'registration/login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'registration/logout.html')
+
+
 def home(request):
+    user = request.user
+    player = Player.objects.get(user=user)
+    player.room = 1
     return render(request, 'homepage.html')

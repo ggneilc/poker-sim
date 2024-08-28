@@ -9,7 +9,7 @@ admin.site.register(BlackjackPlayer)
 class PlayerInline(admin.TabularInline):
     model = BlackjackPlayer
     extra = 0  # No extra blank forms to be displayed
-    fields = ['name', 'score', 'outcome']  # Fields to display in the inline
+    fields = ['chips', 'current_hand_value']  # Fields to display in the inline
 
 
 # Register the Room model with the PlayerInline
