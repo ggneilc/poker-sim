@@ -1,0 +1,11 @@
+<div class="chat">
+  <ul id='chatbox' class="chatbox">
+    {% for message in chat_messages reversed %}
+      {% include 'poker/chat_message.html' %}
+    {% endfor %}
+  </ul>
+  <form id="chat_message_form" class="chatbar" hx-post="{% url 'poker:chat' %}" hx-target="#chatbox" hx-swap="beforeend">
+    {% csrf_token %}
+    {{ form }}
+  </form>
+</div>

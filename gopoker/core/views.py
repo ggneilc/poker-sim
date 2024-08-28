@@ -44,7 +44,7 @@ def logout_view(request):
 
 
 def home(request):
-    user = request.user
-    player = Player.objects.get(user=user)
-    player.room = 1
+    # user = request.user
+    # player = Player.objects.get(user=user)
+    # player.room = 1
     return render(request, 'homepage.html')

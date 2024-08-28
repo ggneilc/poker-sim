@@ -1,4 +1,4 @@
-<button id="start-stop" class="start-stop" hx-swap-oob="true" hx-get="{% url 'stop' %}" hx-confirm="Are you sure?" hx-target="#pokertable" hx-swap="afterbegin transition:true">
+<button id="start-stop" class="start-stop" hx-swap-oob="true" hx-get="{% url 'poker:stop' %}" hx-confirm="Are you sure?" hx-target="#pokertable" hx-swap="afterbegin transition:true">
     {{ button|safe }}
 </button>
 <div id="pokertable" class="pokertable" hx-swap-oob="true">

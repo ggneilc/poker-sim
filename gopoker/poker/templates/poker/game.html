@@ -28,7 +28,7 @@
                 </span>
             </button>
 
-            <button id="start-stop" class="start-stop" hx-get="{% url 'start' %}" hx-target="#game-update-container" hx-swap="transition:true">
+            <button id="start-stop" class="start-stop" hx-get="{% url 'poker:start' %}" hx-target="#game-update-container" hx-swap="transition:true">
                 <span class="material-symbols-outlined">
                     start
                     <!-- stop -->
@@ -152,16 +152,7 @@
             
         </div>
     
-        <div class="bottom">
-            <div class="chat">
-                <div class="chatbox">
-                    <!-- <div class="chatmessage">
-                        {{.Username}}: W
-                    </div> -->
-                </div>
-                <input class="chatbar" type="text" placeholder="Your Message (press enter to send)">
-            </div>
-            
+        <div class="bottom" hx-get="{% url 'poker:chat' %}" hx-trigger="load" hx-swap="afterbegin">            
     
             <div id="playercontainer" class="playercontainer">
 
