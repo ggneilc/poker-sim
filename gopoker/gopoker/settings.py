@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'core.apps.CoreConfig',
     'blackjack.apps.BlackjackConfig',
     'poker.apps.PokerConfig',
@@ -70,7 +71,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'gopoker.wsgi.application'
+# WSGI_APPLICATION = 'gopoker.wsgi.application'
+
+ASGI_APPLICATION = 'gopoker.asgi.application'
 
 
 # Database

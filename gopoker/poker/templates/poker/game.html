@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- htmx script install -->
     <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.js" integrity="sha384-Xh+GLLi0SMFPwtHQjT72aPG19QvKB8grnyRbYBNIdHWc2NkCrz65jlU7YrzO6qRp" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     <div id="container" class="container">
@@ -59,7 +61,7 @@
                 </div>
             </div>
 
-            <!-- <div class="seat1">
+            {% comment %} <div class="seat1">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -67,9 +69,9 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat1action">CHECK</div>
-            </div> -->
+            </div>
 
-            <!-- <div class="seat2">
+            <div class="seat2">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -77,9 +79,9 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat2action">CHECK</div>
-            </div> -->
+            </div>
 
-            <!-- <div class="seat3">
+            <div class="seat3">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -87,9 +89,9 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat3action">CHECK</div>
-            </div> -->
+            </div>
 
-            <!-- <div class="seat4">
+            <div class="seat4">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -97,9 +99,9 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat4action">CHECK</div>
-            </div> -->
+            </div>
 
-            <!-- <div class="seat5">
+            <div class="seat5">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -107,9 +109,9 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat5action">CHECK</div>
-            </div> -->
+            </div>
             
-            <!-- <div class="seat6">
+            <div class="seat6">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -117,9 +119,9 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat6action">CHECK</div>
-            </div> -->
+            </div>
 
-            <!-- <div class="seat7">
+            <div class="seat7">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -127,9 +129,9 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat7action">CHECK</div>
-            </div> -->
+            </div>
 
-            <!-- <div class="seat8">
+            <div class="seat8">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -137,9 +139,9 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat8action">CHECK</div>
-            </div> -->
+            </div>
 
-            <!-- <div class="seat9">
+            <div class="seat9">
                 <div class="seatname">{{.Username}}</div>
                 <div class="seatmoney">{{.Money}}</div>
                 <div class="seathandcontainer">
@@ -147,7 +149,7 @@
                     <div class="card2"></div>
                 </div>
                 <div class="seat9action">CHECK</div>
-            </div> -->
+            </div> {% endcomment %}
 
             
         </div>
@@ -199,6 +201,7 @@
         
     </div>
     <div id="game-update-container"></div>
+    {% block javascript %}{% endblock %}
 </body>
 
 </html>

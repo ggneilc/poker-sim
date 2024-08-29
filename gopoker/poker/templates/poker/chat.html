@@ -1,11 +1,27 @@
-<div class="chat">
+<div id='chat' class="chat">
   <ul id='chatbox' class="chatbox">
     {% for message in chat_messages reversed %}
       {% include 'poker/chat_message.html' %}
     {% endfor %}
   </ul>
-  <form id="chat_message_form" class="chatbar" hx-post="{% url 'poker:chat' %}" hx-target="#chatbox" hx-swap="beforeend">
+  <form id="chat_message_form" class="chatbar"
+    hx-ext="ws"
+    ws-connect="/ws/room/room1"
+    ws-send
+    _="on htmx:wsAfterSend reset() me">
     {% csrf_token %}
     {{ form }}
   </form>
 </div>
+
+{% block javascript %}
+<script>
+
+  function scrollToBottom() {
+    const container = document.getElementById('chatbox');
+    container.scrollTop = container.scrollHeight;
+  }
+  scrollToBottom()
+  
+</script>
+{% endblock %}
