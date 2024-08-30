@@ -1,3 +1,85 @@
 body {
-  background-color: black;
+  background-image: url('shapes.png');
+  height: 100vh;
+  width: 100vw;
+  margin: 0px;
+}
+
+nav {
+  margin: 0px;
+  background-color: #aaaaaa;
+}
+
+#logo {
+  margin: 8px;
+  height: 50px;
+  width: 50px;
+  background-image: url('site-logo.png');
+}
+
+li {
+  flex: 1;
+  display: flex;
+  background-color: rgba(10,10,10,0.9);
+  height: 250px;
+  width: 400px;
+
+  margin: 10px;
+  align-content: center;
+  justify-content: center;
+  overflow: hidden;
+
+  border-radius: 20px;
+  box-shadow: -15px 15px 8px rgba(0,0,0, 0.5); 
+  border: 1px solid black;
+}
+
+li > a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 24px;
+  align-content: center;
+}
+
+li > a:hover {
+  color: #000;
+  background-color: rgba(200,200,200, 0.5);
+}
+
+
+/*--- starting main section ---*/
+
+main {
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(10,10,10, 0.9);
+  flex-grow: 1;
+  width: 80%;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(10,10,10, 0.9);
+  flex-grow: 1;
+  width: 80%;
 }

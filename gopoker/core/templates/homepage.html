@@ -9,24 +9,26 @@
   </head>
   <body>
 	<nav>
-    <h1> welcome to gopoker </h1>
+    <div id="logo"> </div>
 	</nav>
       {% if user.is_authenticated %}
-	<p> choose a game </p>
 	<ul style="list-style-type: none; display: flex;">
-		<li style="flex: 1; border:1px solid black; display:flex; justify-content: center;">	<a href="/blackjack">blackjack</a> </li>
-		<li style="flex: 1; border:1px solid black; display:flex; justify-content: center;">	<a href="/poker">poker</a> </li>
-		<li style="flex: 1; border:1px solid black; display:flex; justify-content: center;">	<a href="/craps">craps</a> </li>
+    <li><a href="/blackjack">blackjack</a> </li>
+		<li><a href="/poker">poker</a> </li>
+		<li><a href="/craps">craps</a> </li>
 	</ul>
   <main>
-    <div>
-        <p> Hello {{user.username}}</p>
-        <a href="/logout">logout</a>
+    <div id="profile">
+      <p> Hello {{user.username}}</p>
+      <a href="/logout">logout</a>
+    </div>
       {% else %}
+      <main>
+      <div id="login">
         <a href="/login">Login Here</a>
         <a href="/register">Register</a>
-      {% endif %}
-    </div>
+      </div>
   </main>
+      {% endif %}
   </body>
 </html>

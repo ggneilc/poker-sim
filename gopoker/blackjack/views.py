@@ -68,6 +68,13 @@ def join_room(request, room_id):
 # hit to recieve another card
 def hit(request, room_id):
     card = utils.Card.newCard()
+
+    user = request.user
+    player = BlackjackPlayer.objects.get(user=user)
+    player.hand.append(card)
+    player.current_hand_value += card.getNum()
+    player.save()
+
     context = {
         "num": card.getNum(),
         "suit": card.getSuit(),
