@@ -10,9 +10,7 @@ from poker.forms import ChatmessageCreateForm
 
 # start the game on loading the page
 def index(request):
-    # game.status = GameStatus.SETUP
-    # if player == host:
-    #   render(start and pause buttons)
+    # When signed in player clicks on it either create a room or join them to their already open room
     return render(request, 'poker/game.html')
 
 # Activated when start game button is clicked
@@ -58,6 +56,6 @@ def chatView(request):
                 'message' : message,
                 'user' : request.user
             }
-            return render(request, 'poker/chat_message.html', context)
+            return render(request, 'poker/partials/chat_message_p.html', context)
 
     return render(request, 'poker/chat.html', {'chat_messages' : chat_messages, 'form' : form})
