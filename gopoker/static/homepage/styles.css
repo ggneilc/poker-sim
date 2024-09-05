@@ -1,6 +1,6 @@
 body {
   font-family: 'Jetbrains Mono';
-  background: center no-repeat url('bg-img.svg');
+  background: center url('pxlcasino.png');
   height: 100vh;
   width: 100vw;
   margin: 0px;
@@ -13,7 +13,7 @@ nav {
   flex-direction: row;
   margin: 0px;
   margin-bottom: 10px;
-  background-color: #aaaaaa;
+  background-color: rgba(10,10,10,0.3);
 }
 
 #logo {

@@ -4,14 +4,18 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GoPoker</title>
+    <title>Blackjack - FreePlay</title>
     <link href="{% static 'blackjack/styles.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'homepage/site-logo.png' %}" type="image/x-icon">
     <!-- htmx script install -->
     <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.js" integrity="sha384-Xh+GLLi0SMFPwtHQjT72aPG19QvKB8grnyRbYBNIdHWc2NkCrz65jlU7YrzO6qRp" crossorigin="anonymous"></script>
   </head>
   <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
     <nav>
-      <a href="/"> <h1> gopoker </h1></a>
+      <a href="/">
+      <div id="logo"> </div>
+      </a>
     </nav>
 
     <main>
@@ -33,9 +37,5 @@
 
       </div>
     </main>
-
-    <footer>
-      <p> copyright </p>
-    </footer>
   </body>
 </html>

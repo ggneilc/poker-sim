@@ -4,8 +4,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% block head %}
+    <!-- htmx script install -->
+    <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.js" integrity="sha384-Xh+GLLi0SMFPwtHQjT72aPG19QvKB8grnyRbYBNIdHWc2NkCrz65jlU7YrzO6qRp" crossorigin="anonymous"></script>
     <link rel="icon" href="{% static 'homepage/site-logo.png' %}" type="image/x-icon">
+    {% block head %}
     <title> FreePlay </title>
     <link href="{% static 'homepage/styles.css' %}" rel="stylesheet">
     {% endblock %}

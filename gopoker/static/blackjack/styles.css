@@ -2,17 +2,24 @@
   background-color: #124;
 }*/
 
-nav { 
+nav {
+  box-sizing: border-box;
   display: flex;
-  height: 50px;
-  width: 100%;
+  flex-direction: row;
+  margin: 0px;
+  margin-bottom: 10px;
+  background-color: rgba(10,10,10,0.3);
+}
 
-  align-items: center;
-  background-color: #500;
-  padding-left: 30px;
+#logo {
+  margin: 8px;
+  height: 50px;
+  width: 50px;
+  background-image: url('../homepage/site-logo.png');
 }
 
 body {
+  background: center no-repeat url('./inside-bg-ls.png');
   margin: 0px;
   height: 100vh;
   width: 100%;
@@ -25,7 +32,6 @@ body {
 }
 
 main {
-  background: center url(../homepage/bg-img.svg);
 }
 
 .main-grid {
