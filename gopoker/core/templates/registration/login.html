@@ -1,18 +1,15 @@
+{% extends "../base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block head %}
   <title>login</title>
   <!-- htmx script install -->
   <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.js" integrity="sha384-Xh+GLLi0SMFPwtHQjT72aPG19QvKB8grnyRbYBNIdHWc2NkCrz65jlU7YrzO6qRp" crossorigin="anonymous"></script>
-</head>
-<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <link href="{% static 'homepage/styles.css' %}" rel="stylesheet">
+{% endblock %}
+{% block subsection %}
   <div>
     <input name="username" placeholder="username">
     <input name="password" placeholder="password">
     <button hx-post="{% url 'login' %}" hx-include="closest div">Login</button>
   </div>
-</body>
-</html>
+{% endblock %}

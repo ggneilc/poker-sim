@@ -18,8 +18,14 @@ body {
   width: 100%;
 }
 
+#banner {
+  background: url('./blackjack-banner.png');
+  height: 150px;
+  width: 650px;
+}
+
 main {
-  background-image: url(./index-bg.png);
+  background: center url(../homepage/bg-img.svg);
 }
 
 .main-grid {
@@ -62,6 +68,7 @@ main {
   background-color: #fff;
   padding: 5px;
   margin: 5px;
+
 }
 
 button {

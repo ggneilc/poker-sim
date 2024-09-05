@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block head %}
+    <link rel="icon" href="{% static 'homepage/site-logo.png' %}" type="image/x-icon">
+    <title> FreePlay </title>
+    <link href="{% static 'homepage/styles.css' %}" rel="stylesheet">
+    {% endblock %}
+  </head>
+  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <nav>
+      <a href="/">
+      <div id="logo"> </div>
+      </a>
+    </nav>
+
+    {% block games %}
+    {% endblock %}
+
+      <main>
+        <div id="profile">
+        {% block subsection %}
+        {% endblock %}
+        </div>
+      </main>
+  </body>
+</html>

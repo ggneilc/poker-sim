@@ -1,34 +1,56 @@
+{% extends './base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <link href="{% static 'homepage/styles.css' %}" rel="stylesheet">
-  </head>
-  <body>
-	<nav>
-    <div id="logo"> </div>
-	</nav>
-      {% if user.is_authenticated %}
+
+{% block games %}
+  {% if user.is_authenticated %}
+    <ul style="list-style-type: none; display: flex;">
+      <li><a href="/blackjack">blackjack</a> </li>
+      <li><a href="/poker">poker</a> </li>
+      <li><a href="/craps">craps</a> </li>
+    </ul>
+  {% else %}
+
 	<ul style="list-style-type: none; display: flex;">
-    <li><a href="/blackjack">blackjack</a> </li>
-		<li><a href="/poker">poker</a> </li>
-		<li><a href="/craps">craps</a> </li>
+    <li><a href="/login">Sign in to Play!</a></li>
+    <li><a href="/register">Register</a></li>
 	</ul>
-  <main>
-    <div id="profile">
-      <p> Hello {{user.username}}</p>
-      <a href="/logout">logout</a>
+
+  {% endif %}
+{% endblock %}
+
+{% block subsection %}
+  {% if user.is_authenticated %}
+  <div id="userline">
+    <div style="flex:1"> pfp here</div>
+    <p style="flex: 3;"> Hello {{user.username}} </p>
+    <a style="flex: 1;"href="/logout">logout</a>
+  </div>
+
+  <div id="stats">
+    <div style="flex:2; background: #000; margin: 10px;">
+      <p> {{user.username}}'s win/loss </p>
     </div>
-      {% else %}
-      <main>
-      <div id="login">
-        <a href="/login">Login Here</a>
-        <a href="/register">Register</a>
-      </div>
-  </main>
-      {% endif %}
-  </body>
-</html>
+    <div style="flex:2; background: #000;margin: 10px;">
+      <p> {{user.username}}'s overall graph </p>
+    </div>
+  </div>
+
+  <div id="history">
+    <div> game 1</div>
+  </div>
+
+  {% else %}
+
+  <div style="height: 80vh; overflow:hidden; border-radius: 20px;">
+    <h1>Welcome to Freeplay</h1>
+    <h3>The online modern casino*</h3>
+    <p>Freeplay is in the name; 
+    <span style="font-style: italic;"> We are not a legitimate online casino!</span>
+  We do not charge money or deal with crypto,
+  we simply provide a geniune casino game experience,
+  updated to today's standards. </p>
+    </p> All PvP games do support a ledger feature to keep track of the flow of money between players so they can sort it out themselves in a 3rd party payment app of their choice (Zelle, Venmo, etc.)
+    </p>
+  </div>
+  {% endif %}
+{% endblock %}
