@@ -16,25 +16,28 @@
       <a href="/">
       <div id="logo"> </div>
       </a>
+      <button hx-post="{% url 'bj:leave' room.link %}"> leave room </button>
     </nav>
 
     <main>
       <div class="main-grid">
         <div id="banner" class="main-child"></div>
 
-
-        <div id="card-holder">
-          <div id="cards"></div>
+        <div id="dealer-card-holder">
+          <div id="dealer-cards"></div>
         </div>
 
-        <div id="name" class="player-action">
-          <input name="url" placeholder="Join friend:">
-          <input name="room" placeholder="Room Name:">
-          <button hx-post="{% url 'bj:create' %}" 
-            hx-include="closest div"> Start </button>
+        <div id="player-card-holder">
+          <div id="player-cards"></div>
         </div>
 
 
+        <div id="player" class="player-action">
+          <input name="uname" placeholder="Enter Name:" value="{{user.username}}">
+          <input name="buyin" placeholder="Buy-in:">
+          <button hx-post="{% url 'bj:join' room.link %}" hx-target="#player" hx-include="closest div">
+          join </button>
+        </div>
       </div>
     </main>
   </body>

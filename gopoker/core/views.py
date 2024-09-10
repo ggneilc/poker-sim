@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegistrationForm
 from .models import Player
+import random
+import string
 
 
 def register(request):
@@ -44,7 +46,19 @@ def logout_view(request):
 
 
 def home(request):
-    # user = request.user
-    # player = Player.objects.get(user=user)
-    # player.room = 1
+    user = request.user
+    if user.is_authenticated:
+        player, created = Player.objects.get_or_create(user=user)
+        if created:
+            player.save()
     return render(request, 'homepage.html')
+
+
+def genRandomID():
+    # Define the character set: uppercase letters and digits
+    characters = string.ascii_uppercase + string.digits
+
+    # Generate a random 6-character ID
+    room_id = ''.join(random.choice(characters) for _ in range(6))
+
+    return room_id

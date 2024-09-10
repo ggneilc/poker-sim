@@ -13,7 +13,8 @@ class Room(models.Model):
         "PK": "Poker",
         "CR": "Craps",
     }
-    name = models.CharField(max_length=150)
+
+    link = models.CharField(max_length=6, null=True)
     status = models.CharField(max_length=1, choices=STATUSES, default="O")
     host = models.ForeignKey('Player', on_delete=models.SET_NULL,
                              null=True, blank=True,
@@ -21,14 +22,14 @@ class Room(models.Model):
     game = models.CharField(max_length=2, choices=GAMES, default="E")
 
     def __str__(self):
-        return f"{self.name} (Host: {self.host.user.username if self.host else 'No Host'}): {self.get_game_display()}, {self.get_status_display()} "
+        return f"(Host: {self.host.user.username if self.host else 'No Host'}): {self.get_game_display()}, {self.get_status_display()} "
 
 
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE,
+    room = models.ForeignKey(Room, on_delete=models.SET_NULL,
                              related_name="players",
-                             default=1)
+                             null=True, blank=True,)
 
     def __str__(self):
         return f"{self.id} Name: {self.user.username}"

@@ -47,6 +47,12 @@ class Card:
         num = self.getNumString()
         return f"{num} of {suit}"
 
+    def to_dict(self):
+        return {
+            'num': self.num,
+            'suit': self.suit
+        }
+
     @staticmethod
     def newCard() -> 'Card':
         num = random.randint(1, 13) #randint is inclusive
@@ -95,7 +101,11 @@ class Deck:
         for i in self.cards:
             print(i.toString())
 
-
+    def to_dict(self):
+        return {
+            'count': self.count,
+            'cards': [card.to_dict() for card in self.cards]
+        }
 
 
 class Player:

@@ -4,7 +4,7 @@
 {% block games %}
   {% if user.is_authenticated %}
     <ul style="list-style-type: none; display: flex;">
-      <li><a href="/blackjack">blackjack</a> </li>
+      <li><button hx-post="/blackjack/">blackjack</button> </li>
       <li><a href="/poker">poker</a> </li>
       <li><a href="/craps">craps</a> </li>
     </ul>

@@ -15,4 +15,4 @@ class PlayerInline(admin.TabularInline):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     inlines = [PlayerInline]
-    list_display = ['id', 'name', 'status']
+    list_display = ['id', 'link', 'status']

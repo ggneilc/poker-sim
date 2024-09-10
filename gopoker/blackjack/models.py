@@ -5,7 +5,10 @@ from core.models import Player, Room
 # Create your models here.
 
 
-class BlackjackPlayer(Player):
+class BlackjackPlayer(models.Model):
+    player = models.OneToOneField(Player,
+                                  on_delete=models.CASCADE,
+                                  related_name="blackjack_player")
     chips = models.IntegerField(default=0)
     has_blackjack = models.BooleanField(default=False)
     current_hand_value = models.IntegerField(default=0)

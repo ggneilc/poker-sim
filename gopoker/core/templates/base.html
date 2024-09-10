@@ -13,6 +13,8 @@
     {% endblock %}
   </head>
   <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <div id="gamecontainer">
+
     <nav>
       <a href="/">
       <div id="logo"> </div>
@@ -28,5 +30,6 @@
         {% endblock %}
         </div>
       </main>
+    </div>
   </body>
 </html>
