@@ -6,11 +6,12 @@
   </ul>
   <form id="chat_message_form" class="chatbar"
     hx-ext="ws"
-    ws-connect="/ws/room/room1"
+    ws-connect="/ws/room/{{room.link}}"
     ws-send
     _="on htmx:wsAfterSend reset() me">
     {% csrf_token %}
-    {{ form }}
+    {{ form.body }}
+    {{ form.type }}
   </form>
 </div>
 

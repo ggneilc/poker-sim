@@ -47,6 +47,12 @@ class Card:
         suit = self.getSuitString()
         num = self.getNumString()
         return f"{num} of {suit}"
+    
+    def to_dict(self):
+        return {
+            'num': self.num,
+            'suit': self.suit
+        }
 
     @staticmethod
     def newCard() -> 'Card':
@@ -94,6 +100,12 @@ class Deck:
         print(f"Remaining Cards: {len(self.cards)}\n")
         for i in self.cards:
             print(i.toString())
+
+    def to_dict(self):
+        return {
+            'count': self.count,
+            'cards': [card.to_dict() for card in self.cards]
+        }
 
 
 

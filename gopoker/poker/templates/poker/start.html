@@ -1,10 +1,10 @@
-<button id="start-stop" class="start-stop" hx-swap-oob="true" hx-get="{% url 'poker:stop' %}" hx-confirm="Are you sure?" hx-target="#pokertable" hx-swap="afterbegin transition:true">
+<button id="start-stop" class="start-stop" hx-swap-oob="true" hx-get="{% url 'poker:stop' link %}" hx-confirm="Are you sure?" hx-target="#pokertable" hx-swap="afterbegin transition:true">
     {{ button|safe }}
 </button>
 <div id="pokertable" class="pokertable" hx-swap-oob="true">
     {{ board|safe }}
 </div>
-<div id="playercontainer" class="playercontainer" hx-swap-oob="true">
+<div id="playercontainer" class="playercontainer" hx-swap-oob="beforeend">
     {{ info|safe }}
 </div>
 

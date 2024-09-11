@@ -1,6 +1,10 @@
 <div id="chatbox" hx-swap-oob="beforeend">
   <div class="fade-in-up">
-    {% include 'poker/chat_message.html' %}
+    {% if type == "message" %}
+      {% include 'poker/chat_message.html' %}
+    {% elif type == "broadcast" %}
+      {% include 'poker/chat_broadcast.html' %}
+    {% endif %}
   </div>
 
 

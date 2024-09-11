@@ -1,27 +1,102 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from . import utils
+from .utils import *
 from poker.models import *
 from poker.forms import ChatmessageCreateForm
+from core.models import Player
+from core.views import genRandomID
+import json
 
 
 # Create your views here.
 
 # start the game on loading the page
 def index(request):
-    # When signed in player clicks on it either create a room or join them to their already open room
-    return render(request, 'poker/game.html')
+    user = request.user
+    player = Player.objects.get(user=user)
+    if player.room is not None:
+        response = HttpResponse()
+        response['HX-redirect'] = f'/poker/room/{player.room.link}'
+        return response
+    else:
+        deck = Deck()
+        deck.shuffle()
+        link = genRandomID()
+        poker_room = PokerRoom(host=player,
+                               link=link,
+                               game="PK",
+                               deck=json.dumps(deck.to_dict()))
+        poker_room.save()
+        poker_player = PokerPlayer.objects.get(player=player)
+        poker_player.host = True
+        poker_player.save()
+        response = HttpResponse()
+        response['HX-redirect'] = f'/poker/room/{link}'
+        return response
+
+# Redirect to display the newly created room
+def displayRoom(request, room_id):
+    '''display the room at its id'''
+    player = Player.objects.get(user=request.user)
+    poker_player = PokerPlayer.objects.get(player=player)
+    cur_room = PokerRoom.objects.get(link=room_id)
+    context = {
+        'room': cur_room,
+        'pokerplayer': poker_player
+    }
+    return render(request, 'poker/game.html', context)
+
+
+# Sit down at the blackjack table
+#   Find the user's BlackjackPlayer 'account'
+#   If not yet created, create it
+#   else, update the player's buyin
+def joinRoom(request, room_id):
+    '''create blackjackplayer in room (sit down at table)'''
+    room = PokerRoom.objects.get(link=room_id)
+    nickname = request.POST.get('nickname')
+    buyin = request.POST.get('buyin')
+
+    # get the Player from the user (request)
+    user = request.user
+    player = Player.objects.get(user=user)
+    player.room = room
+    player.save()
+
+    # get the players' PokerPlayer
+    pokerplayer, created = PokerPlayer.objects.get_or_create(player=player)
+    pokerplayer.stack = buyin
+    pokerplayer.save()
+
+    context = {
+        'room': room,
+        'nickname': nickname,
+        'stack': buyin,
+    }
+    return render(request, 'poker/player.html', context)
+
+
+def leaveRoom(request, room_id):
+    '''leave the current room'''
+    user = request.user
+    player = Player.objects.get(user=user)
+    player.room = None
+    player.save()
+    response = HttpResponse()
+    response['HX-redirect'] = r'/'
+    return response
 
 # Activated when start game button is clicked
 # Will populate the table felt
-def startGame(request):
+def startGame(request, room_id):
     # game.status = GameStatus.IN_PROGRESS
     # This should initiate the gameplay loop
     context = {
         'button': render(request, 'poker/stop.html').content.decode(),
         'board': render(request, 'poker/felt.html').content.decode(),
         'info': render(request, 'poker/player_options.html').content.decode(),
+        'link': room_id
     }
     return render(request, 'poker/start.html', context)
 
@@ -31,7 +106,7 @@ def pauseGame(request):
     # game.status = GameStatus.PAUSED
     return render(request, 'poker/pause.hmtl')
 
-def stopGame(request):
+def stopGame(request, room_id):
     # game.status = GameStatus.STOPPED
     return render(request, 'poker/stop_game.html')
 
@@ -39,10 +114,15 @@ def raiseBet(request):
     return render(request, 'poker/raise.html')
 
 # CHAT FEATURE
-def chatView(request):
-    poker_room = get_object_or_404(PokerRoom, name="room1")
+def chatView(request, room_id):
+    poker_room = get_object_or_404(PokerRoom, link=room_id)
     chat_messages = poker_room.chat_messages.all()[:30]
     form = ChatmessageCreateForm()
+    context = {
+        'chat_messages' : chat_messages, 
+        'form' : form,
+        'room' : poker_room
+    }
 
     if request.method == 'POST':
         form = ChatmessageCreateForm(request.POST)
@@ -58,4 +138,4 @@ def chatView(request):
             }
             return render(request, 'poker/partials/chat_message_p.html', context)
 
-    return render(request, 'poker/chat.html', {'chat_messages' : chat_messages, 'form' : form})
+    return render(request, 'poker/chat.html', context)

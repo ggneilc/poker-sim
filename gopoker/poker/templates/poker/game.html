@@ -31,18 +31,23 @@
                 </span>
             </button>
 
-            <button id="start-stop" class="start-stop" hx-get="{% url 'poker:start' %}" hx-target="#game-update-container" hx-swap="transition:true">
-                <span class="material-symbols-outlined">
-                    start
-                    <!-- stop -->
-                </span>
-            </button>
+            {% if pokerplayer.host == True %}
+                <button id="start-stop" class="start-stop" 
+                    hx-get="{% url 'poker:start' room.link %}" 
+                    hx-target="#game-update-container" 
+                    hx-swap="transition:true">
+                    <span class="material-symbols-outlined">
+                        start
+                        <!-- stop -->
+                    </span>
+                </button>
 
-            <button class="pause">
-                <span class="material-symbols-outlined">
-                    play_pause
-                </span>
-            </button>
+                <button class="pause">
+                    <span class="material-symbols-outlined">
+                        play_pause
+                    </span>
+                </button>
+            {% endif %}
 
             <button class="menu">
                 <span class="material-symbols-outlined">
@@ -57,10 +62,30 @@
                 <div class="popupmessage">
                     PRESS ON THE LINK TO COPY AND SEND TO FRIENDS
                     <div class="popupmessagecontainer">
-                        <button class="gamelink">http://gopoker.gg/room/aaaaaaaaaaaaa</button>
+                        <button id="full-url" class="gamelink"></button>
+                        <script>
+                            // Get the full URL of the current page
+                            var fullUrl = window.location.href;
+                    
+                            // Display the full URL in the span element
+                            document.getElementById('full-url').textContent = fullUrl;
+                            document.getElementById('full-url').addEventListener('click', function() {
+                                // Use the Clipboard API to copy the URL to the clipboard
+                                navigator.clipboard.writeText(fullUrl).then(function() {
+                                    alert('URL copied to clipboard!');
+                                }).catch(function(error) {
+                                    console.error('Error copying text: ', error);
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
+
+            {% comment %} {% for player in room.players.all() %}
+                {% include 'poker/seat.html' %}
+            {% endfor %} {% endcomment %}
+
 
             {% comment %} <div class="seat1">
                 <div class="seatname">{{.Username}}</div>
@@ -155,15 +180,24 @@
             
         </div>
     
-        <div class="bottom" hx-get="{% url 'poker:chat' %}" hx-trigger="load" hx-swap="afterbegin">            
+        <div class="bottom" 
+            hx-get="{% url 'poker:chat' room.link %}" 
+            hx-trigger="load" 
+            hx-swap="afterbegin">            
     
             <div id="playercontainer" class="playercontainer">
 
-                <!-- <div class="newplayercontainer">
-                    <input class="nicknamebar" type="text" placeholder="Enter Nickname">
-                    <input class="buyinbar" type="text" placeholder="Enter Buy-in">
-                    <button class="sitdown">SIT DOWN</button>
-                </div> -->
+                <div class="newplayercontainer">
+                    <input class="nicknamebar" name="nickname" type="text" placeholder="Enter Nickname" value={{user.username}}>
+                    <input class="buyinbar" name="buyin" type="text" placeholder="Enter Buy-in">
+                    <button class="sitdown" 
+                        hx-post="{% url 'poker:join' room.link %}" 
+                        hx-target="#playercontainer"
+                        hx-include="closest div"
+                        hx-swap="innerHTML">
+                        SIT DOWN
+                    </button>
+                </div>
 
                 <!-- <div class="playeraction">CHECK</div> -->
                 

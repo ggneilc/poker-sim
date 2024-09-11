@@ -703,6 +703,20 @@ input {
     flex-shrink: 0;
 }
 
+.chatbroadcast {
+    padding: .5vw;
+    width: auto;
+    margin-bottom: 1vw;
+    margin-left: .5vw;
+
+    background-color: var(--main-color2);
+    color: #eb9fef;
+    font-size: small;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+}
+
 .chatbar {
     border-radius: 10px; 
     padding: .5vw;
