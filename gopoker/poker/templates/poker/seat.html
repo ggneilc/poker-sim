@@ -1,9 +1,9 @@
 <div class="seat{{forloop.counter}}">
-  <div class="seatname">{{player.user.username}}</div>
-  <div class="seatmoney">{{.Money}}</div>
+  <div class="seatname">{{pokerplayer.player.user.username}}</div>
+  <div class="seatmoney">{{pokerplayer.stack}}</div>
   <div class="seathandcontainer">
-    <div class="card1"></div>
-    <div class="card2"></div>
+    {% comment %} <div class="card1"></div>
+    <div class="card2"></div> {% endcomment %}
   </div>
-  <div class="seat1action">CHECK</div>
+  {% comment %} <div class="seat{{forloop.counter}}action">CHECK</div> {% endcomment %}
 </div>

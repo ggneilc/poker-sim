@@ -10,7 +10,7 @@ class PokerroomConsumer(WebsocketConsumer):
     super().__init__(*args, **kwargs)
     self.event_handlers = {
       'chat_message': self.handle_chat_message,
-      # Add more event types and their handlers here
+      'player_joined': self.player_joined
     }
 
   def connect(self):
@@ -38,6 +38,7 @@ class PokerroomConsumer(WebsocketConsumer):
     
     if event_type in self.event_handlers:
       self.event_handlers[event_type](data)
+      print(f"received {event_type}")
     else:
       print(f"Unhandled event type: {event_type}")
 
@@ -95,4 +96,27 @@ class PokerroomConsumer(WebsocketConsumer):
       'type': 'broadcast'
     }
     html = render_to_string('poker/partials/chat_message_p.html', context)
+    self.send(text_data=html)
+
+  # SEAT HANDLING
+  def player_joined(self, data):
+    # Send message to WebSocket
+    print('hi')
+    pokerplayer = data['pokerplayer']
+
+    event = {
+      'type': 'render_seat',
+      'pokerplayer': pokerplayer
+    }
+
+    async_to_sync(self.channel_layer.group_send)(
+      self.pokerroom_name, event
+    )
+  
+  def render_seat(self, event):
+    pokerplayer = event['pokerplayer']
+    context = {
+      'pokerplayer': pokerplayer
+    }
+    html = render_to_string('poker/partials/seat_p.html', context)
     self.send(text_data=html)

@@ -28,7 +28,8 @@ def index(request):
                                game="PK",
                                deck=json.dumps(deck.to_dict()))
         poker_room.save()
-        poker_player = PokerPlayer.objects.get(player=player)
+
+        poker_player, created = PokerPlayer.objects.get_or_create(player=player)
         poker_player.host = True
         poker_player.save()
         response = HttpResponse()
@@ -39,7 +40,7 @@ def index(request):
 def displayRoom(request, room_id):
     '''display the room at its id'''
     player = Player.objects.get(user=request.user)
-    poker_player = PokerPlayer.objects.get(player=player)
+    poker_player, created = PokerPlayer.objects.get_or_create(player=player)
     cur_room = PokerRoom.objects.get(link=room_id)
     context = {
         'room': cur_room,
@@ -48,10 +49,6 @@ def displayRoom(request, room_id):
     return render(request, 'poker/game.html', context)
 
 
-# Sit down at the blackjack table
-#   Find the user's BlackjackPlayer 'account'
-#   If not yet created, create it
-#   else, update the player's buyin
 def joinRoom(request, room_id):
     '''create blackjackplayer in room (sit down at table)'''
     room = PokerRoom.objects.get(link=room_id)
@@ -65,7 +62,7 @@ def joinRoom(request, room_id):
     player.save()
 
     # get the players' PokerPlayer
-    pokerplayer, created = PokerPlayer.objects.get_or_create(player=player)
+    pokerplayer = PokerPlayer.objects.get(player=player)
     pokerplayer.stack = buyin
     pokerplayer.save()
 
@@ -74,6 +71,7 @@ def joinRoom(request, room_id):
         'nickname': nickname,
         'stack': buyin,
     }
+
     return render(request, 'poker/player.html', context)
 
 
@@ -86,6 +84,15 @@ def leaveRoom(request, room_id):
     response = HttpResponse()
     response['HX-redirect'] = r'/'
     return response
+
+# Renders a new players seat to the screen
+def renderSeat(request, player_id):
+   print('hey')
+   poker_player = get_object_or_404(PokerPlayer, id=player_id)
+   context = {
+       'poker_player': poker_player
+   }
+   return render(request, 'poker/seat_p.html', context)
 
 # Activated when start game button is clicked
 # Will populate the table felt

@@ -15,7 +15,9 @@
     <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <div id="container" class="container">
+    <div id="container" class="container"
+        hx-ext="ws"
+        ws-connect="/ws/room/{{room.link}}">
         <div class="top">
             <button onclick="window.location.href='/';" class="logo">
                 <span class="material-symbols-outlined">
@@ -57,7 +59,7 @@
         </div>
         
     
-        <div class="gamecontainer">
+        <div id="gamecontainer" class="gamecontainer">
             <div id="pokertable" class="pokertable">
                 <div class="popupmessage">
                     PRESS ON THE LINK TO COPY AND SEND TO FRIENDS
@@ -82,101 +84,9 @@
                 </div>
             </div>
 
-            {% comment %} {% for player in room.players.all() %}
+            {% for player in room.players.all %}
                 {% include 'poker/seat.html' %}
-            {% endfor %} {% endcomment %}
-
-
-            {% comment %} <div class="seat1">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat1action">CHECK</div>
-            </div>
-
-            <div class="seat2">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat2action">CHECK</div>
-            </div>
-
-            <div class="seat3">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat3action">CHECK</div>
-            </div>
-
-            <div class="seat4">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat4action">CHECK</div>
-            </div>
-
-            <div class="seat5">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat5action">CHECK</div>
-            </div>
-            
-            <div class="seat6">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat6action">CHECK</div>
-            </div>
-
-            <div class="seat7">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat7action">CHECK</div>
-            </div>
-
-            <div class="seat8">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat8action">CHECK</div>
-            </div>
-
-            <div class="seat9">
-                <div class="seatname">{{.Username}}</div>
-                <div class="seatmoney">{{.Money}}</div>
-                <div class="seathandcontainer">
-                    <div class="card1"></div>
-                    <div class="card2"></div>
-                </div>
-                <div class="seat9action">CHECK</div>
-            </div> {% endcomment %}
-
+            {% endfor %}
             
         </div>
     
@@ -188,15 +98,19 @@
             <div id="playercontainer" class="playercontainer">
 
                 <div class="newplayercontainer">
-                    <input class="nicknamebar" name="nickname" type="text" placeholder="Enter Nickname" value={{user.username}}>
-                    <input class="buyinbar" name="buyin" type="text" placeholder="Enter Buy-in">
-                    <button class="sitdown" 
-                        hx-post="{% url 'poker:join' room.link %}" 
-                        hx-target="#playercontainer"
-                        hx-include="closest div"
-                        hx-swap="innerHTML">
-                        SIT DOWN
-                    </button>
+                    <form class="newplayercontainer"
+                        ws-send
+                        hx-vals='{"type": "player_joined", "pokerplayer": pokerplayer}'>
+                        <input class="nicknamebar" name="nickname" type="text" placeholder="Enter Nickname" value={{user.username}}>
+                        <input class="buyinbar" name="buyin" type="text" placeholder="Enter Buy-in">
+                        <button class="sitdown" type="submit" 
+                            hx-post="{% url 'poker:join' room.link %}" 
+                            hx-target="#playercontainer"
+                            hx-include="closest div"
+                            hx-swap="innerHTML">
+                            SIT DOWN
+                        </button>
+                    </form>
                 </div>
 
                 <!-- <div class="playeraction">CHECK</div> -->

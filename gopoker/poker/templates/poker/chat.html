@@ -5,13 +5,10 @@
     {% endfor %}
   </ul>
   <form id="chat_message_form" class="chatbar"
-    hx-ext="ws"
-    ws-connect="/ws/room/{{room.link}}"
     ws-send
     _="on htmx:wsAfterSend reset() me">
     {% csrf_token %}
-    {{ form.body }}
-    {{ form.type }}
+    {{ form }}
   </form>
 </div>
 
