@@ -68,6 +68,7 @@ def join_room(request, room_id):
     return render(request, 'blackjack/player.html', context)
 
 
+# removes the user from the current room
 def leave_room(request, room_id):
     '''leave the current room'''
     user = request.user

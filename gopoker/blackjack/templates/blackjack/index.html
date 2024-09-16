@@ -9,17 +9,23 @@
     <link rel="icon" href="{% static 'homepage/site-logo.png' %}" type="image/x-icon">
     <!-- htmx script install -->
     <script src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.js" integrity="sha384-Xh+GLLi0SMFPwtHQjT72aPG19QvKB8grnyRbYBNIdHWc2NkCrz65jlU7YrzO6qRp" crossorigin="anonymous"></script>
+    <!-- htmx websocket install -->
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
   </head>
   <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
     <nav>
       <a href="/">
-      <div id="logo"> </div>
+        <div id="logo"> </div>
       </a>
       <button hx-post="{% url 'bj:leave' room.link %}"> leave room </button>
     </nav>
 
-    <main>
+    <main id="game-container" 
+      hx-ext="ws" 
+      ws-connect="/ws/blackjack/{{room.link}}"
+      hx-trigger="load">
+
       <div class="main-grid">
         <div id="banner" class="main-child"></div>
 
@@ -35,10 +41,15 @@
         <div id="player" class="player-action">
           <input name="uname" placeholder="Enter Name:" value="{{user.username}}">
           <input name="buyin" placeholder="Buy-in:">
-          <button hx-post="{% url 'bj:join' room.link %}" hx-target="#player" hx-include="closest div">
+          <button 
+            hx-post="{% url 'bj:join' room.link %}" 
+            hx-target="#player" 
+            hx-include="closest div">
           join </button>
         </div>
       </div>
+
     </main>
+
   </body>
 </html>

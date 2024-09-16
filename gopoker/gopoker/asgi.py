@@ -14,17 +14,16 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 from channels.auth import AuthMiddlewareStack
 
-from poker import routing
+from poker.routing import websocket_urlpatterns as poker
+from blackjack.routing import websocket_urlpatterns as bj
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gopoker.settings')
 
 django_asgi_app = get_asgi_application()
 
-# Add one for blackjack as well
-
 application = ProtocolTypeRouter({
   "http": django_asgi_app,
   "websocket": AllowedHostsOriginValidator(
-    AuthMiddlewareStack(URLRouter(routing.websocket_urlpatterns))
+    AuthMiddlewareStack(URLRouter(bj + poker))
   ),
 })
