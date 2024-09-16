@@ -1,7 +1,19 @@
 <div class="player-action">
 	{{name}} | {{chips}}
   <div>
-    <button hx-post={% url 'bj:hit' room.id %} hx-target="#player-cards" hx-swap="beforeend"> Hit </button>
-    <button hx-post={% url 'bj:stand' room.id %} hx-target="#dealer-cards" hx-swap="beforeend"> Stand </button>
+    <button hx-trigger="click"
+      ws-send=""
+      hx-vals='{
+        "type": "player_action",
+        "event_type": "hit", 
+        "user": "{{user}}"
+      }'> Hit </button>
+    <button hx-trigger="click"
+      ws-send=""
+      hx-vals='{
+        "type": "player_action",
+        "event_type": "stand", 
+        "user": "{{user}}"
+      }'> Stand </button>
   </div>
 </div>
