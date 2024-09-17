@@ -1,5 +1,4 @@
 <h1> FreePlay - The most fair casino platform online </h1>
----
 
 Freeplay is designed with statistical distribution in mind to keep the rate of cards coming truly random, so players don't have to get angry or not trust the platform they are playing on; You can just play and worry about your odds against your opponents.
 
