@@ -12,10 +12,13 @@ def index(request):
     # create a base room
     user = request.user
     player = Player.objects.get(user=user)
+
+    # player is already in a room
     if player.room is not None:
         response = HttpResponse()
         response['HX-redirect'] = f'/blackjack/room/{player.room.link}'
         return response
+    # player does not have a room
     else:
         deck = Deck()
         deck.shuffle()
