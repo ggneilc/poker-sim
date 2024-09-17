@@ -6,9 +6,11 @@ d1,d2,d3,d4,d5,d6 = Deck()
 shoe = [d1.shuffle(), d2.shuffle(), ..., d6.shuffle()]
 # index shoe in the same way we index deck!
 '''
-import random, time
+import random
+import time
 
 random.seed(time.time())
+
 
 class Card:
     def __init__(self, x: int, s: int):
@@ -19,7 +21,7 @@ class Card:
         return self.num
 
     def getNumString(self):
-        switch={
+        switch = {
             '1': 'Ace',
             '2': '2', '3': '3', '4': '4',
             '5': '5', '6': '6', '7': '7',
@@ -34,7 +36,7 @@ class Card:
         return self.suit
 
     def getSuitString(self):
-        switch={
+        switch = {
             '1': 'Hearts',
             '2': 'Diamonds',
             '3': 'Spades',
@@ -47,23 +49,30 @@ class Card:
         num = self.getNumString()
         return f"{num} of {suit}"
 
+    # To JSON
     def to_dict(self):
         return {
             'num': self.num,
             'suit': self.suit
         }
 
+    # From JSON
+    @classmethod
+    def from_dict(cls, card_dict):
+        return cls(card_dict['num'], card_dict['suit'])
+
     @staticmethod
     def newCard() -> 'Card':
-        num = random.randint(1, 13) #randint is inclusive
-        suit = random.randint(1,4)
+        num = random.randint(1, 13)  # randint is inclusive
+        suit = random.randint(1, 4)
         return Card(num, suit)
 
+
 class Deck:
-    def __init__(self): 
+    def __init__(self):
         self.count = 52
         self.cards = []
-    
+
     def deal(self):
         '''Deal a single card to a player'''
         index = random.randint(1,52) - (int(time.time()) % 10) # random number
@@ -101,11 +110,20 @@ class Deck:
         for i in self.cards:
             print(i.toString())
 
+    # To JSON
     def to_dict(self):
         return {
             'count': self.count,
             'cards': [card.to_dict() for card in self.cards]
         }
+
+    # From JSON
+    @classmethod
+    def from_dict(cls, deck_dict):
+        deck = cls()  # Create a new Deck instance
+        deck.count = deck_dict['count']
+        deck.cards = [Card.from_dict(card_dict) for card_dict in deck_dict['cards']]
+        return deck
 
 
 class Player:

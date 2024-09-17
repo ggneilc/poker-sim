@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .utils import Deck, Card
+from .utils import Deck
 from blackjack.models import BlackjackPlayer, BlackjackRoom
 from core.models import Player
 from core.views import genRandomID
@@ -78,36 +78,3 @@ def leave_room(request, room_id):
     response = HttpResponse()
     response['HX-redirect'] = r'/'
     return response
-
-
-# hit to recieve another card
-def hit(request, room_id):
-    card = Card.newCard()
-
-    user = request.user
-    p = Player.objects.get(user=user)
-    player = BlackjackPlayer.objects.get(player=p)
-    player.hand.append(card)
-    player.current_hand_value += card.getNum()
-    player.save()
-
-    context = {
-        "num": card.getNum(),
-        "suit": card.getSuit(),
-        "card": card.toString()
-    }
-    return render(request, 'blackjack/card.html', context)
-
-
-# moves action to dealer
-def stand(request, room_id):
-    room = BlackjackRoom.objects.get(pk=room_id)
-    card = Card.newCard()
-    context = {
-        "num": card.getNum(),
-        "suit": card.getSuit(),
-        "card": card.toString()
-    }
-    room.dealer_score += card.getNum()
-    room.save()
-    return render(request, 'blackjack/card.html', context)
