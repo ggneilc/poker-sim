@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 from .utils import *
 from poker.models import *
 from poker.forms import ChatmessageCreateForm
@@ -42,9 +44,11 @@ def displayRoom(request, room_id):
     player = Player.objects.get(user=request.user)
     poker_player, created = PokerPlayer.objects.get_or_create(player=player)
     cur_room = PokerRoom.objects.get(link=room_id)
+    print("DISPLAYING ROOM")
     context = {
         'room': cur_room,
-        'pokerplayer': poker_player
+        'cur_pokerplayer': poker_player,
+        'player_queue': cur_room.player_queue
     }
     return render(request, 'poker/game.html', context)
 
@@ -65,6 +69,16 @@ def joinRoom(request, room_id):
     pokerplayer = PokerPlayer.objects.get(player=player)
     pokerplayer.stack = buyin
     pokerplayer.save()
+
+    # notify websocket that player joined
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        room_id,
+        {
+            'type': 'player_joined',
+            'pokerplayer': pokerplayer
+        }
+    )
 
     context = {
         'room': room,

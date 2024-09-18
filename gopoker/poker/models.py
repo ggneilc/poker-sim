@@ -28,6 +28,11 @@ class PokerPlayer(models.Model):
 class PokerRoom(Room):
     # Additional fields and methods specific to Poker rooms
     deck = models.JSONField(default=list, blank=True)
+    player_queue = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.player_queue = []
 
 
 class PokerMessages(models.Model):

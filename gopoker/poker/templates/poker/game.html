@@ -33,11 +33,13 @@
                 </span>
             </button>
 
-            {% if pokerplayer.host == True %}
-                <button id="start-stop" class="start-stop" 
-                    hx-get="{% url 'poker:start' room.link %}" 
-                    hx-target="#game-update-container" 
-                    hx-swap="transition:true">
+            {% if cur_pokerplayer.host == True %}
+                <button id="start-stop" class="start-stop"
+                    hx-trigger="click"
+                    ws-send=""
+                    hx-vals='{
+                        "type": "start_game"
+                    }'>
                     <span class="material-symbols-outlined">
                         start
                         <!-- stop -->
@@ -84,8 +86,18 @@
                 </div>
             </div>
 
-            {% for player in room.players.all %}
-                {% include 'poker/seat.html' %}
+            {% for pplayer in player_queue %}
+                {% if pplayer.player.user.username != cur_pokerplayer.player.user.username %}
+                    <div class="seat{{forloop.counter}}">
+                        <div class="seatname">{{pplayer.player.user.username}}</div>
+                        <div class="seatmoney">{{pplayer.stack}}</div>
+                        <div class="seathandcontainer">
+                            {% comment %} <div class="card1"></div>
+                            <div class="card2"></div> {% endcomment %}
+                        </div>
+                        {% comment %} <div class="seat{{forloop.counter}}action">CHECK</div> {% endcomment %}
+                    </div>
+                {% endif %}
             {% endfor %}
             
         </div>
@@ -98,19 +110,15 @@
             <div id="playercontainer" class="playercontainer">
 
                 <div class="newplayercontainer">
-                    <form class="newplayercontainer"
-                        ws-send
-                        hx-vals='{"type": "player_joined", "pokerplayer": pokerplayer}'>
-                        <input class="nicknamebar" name="nickname" type="text" placeholder="Enter Nickname" value={{user.username}}>
-                        <input class="buyinbar" name="buyin" type="text" placeholder="Enter Buy-in">
-                        <button class="sitdown" type="submit" 
-                            hx-post="{% url 'poker:join' room.link %}" 
-                            hx-target="#playercontainer"
-                            hx-include="closest div"
-                            hx-swap="innerHTML">
-                            SIT DOWN
-                        </button>
-                    </form>
+                    <input class="nicknamebar" name="nickname" type="text" placeholder="Enter Nickname" value={{user.username}}>
+                    <input class="buyinbar" name="buyin" type="text" placeholder="Enter Buy-in">
+                    <button class="sitdown" type="submit" 
+                        hx-post="{% url 'poker:join' room.link %}" 
+                        hx-target="#playercontainer"
+                        hx-include="closest div"
+                        hx-swap="innerHTML">
+                        SIT DOWN
+                    </button>
                 </div>
 
                 <!-- <div class="playeraction">CHECK</div> -->
@@ -149,7 +157,6 @@
         </div> -->
         
     </div>
-    <div id="game-update-container"></div>
     {% block javascript %}{% endblock %}
 </body>
 

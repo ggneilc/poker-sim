@@ -1,5 +1,5 @@
 from channels.generic.websocket import WebsocketConsumer
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from asgiref.sync import async_to_sync
 from .models import *
@@ -10,7 +10,8 @@ class PokerroomConsumer(WebsocketConsumer):
     super().__init__(*args, **kwargs)
     self.event_handlers = {
       'chat_message': self.handle_chat_message,
-      'player_joined': self.player_joined
+      'player_joined': self.player_joined,
+      'start_game': self.handle_start_game
     }
 
   def connect(self):
@@ -100,13 +101,14 @@ class PokerroomConsumer(WebsocketConsumer):
 
   # SEAT HANDLING
   def player_joined(self, data):
-    # Send message to WebSocket
-    print('hi')
     pokerplayer = data['pokerplayer']
+    self.pokerroom.player_queue.append(pokerplayer)
+    self.pokerroom.save()
 
     event = {
       'type': 'render_seat',
-      'pokerplayer': pokerplayer
+      'pokerplayer': data['pokerplayer'],
+      'sender_channel_name': self.channel_name
     }
 
     async_to_sync(self.channel_layer.group_send)(
@@ -114,9 +116,29 @@ class PokerroomConsumer(WebsocketConsumer):
     )
   
   def render_seat(self, event):
-    pokerplayer = event['pokerplayer']
-    context = {
-      'pokerplayer': pokerplayer
+    if self.channel_name != event['sender_channel_name']: 
+      pokerplayer = event['pokerplayer']
+      seatnum = len(self.pokerroom.player_queue)
+      context = {
+        'newpokerplayer': pokerplayer,
+        'seatnum': seatnum
+      }
+      html = render_to_string('poker/partials/seat_p.html', context)
+      self.send(text_data=html)
+
+  # Starting the game
+  def handle_start_game(self, data):
+    event = {
+      'type': 'send_start_game'
     }
-    html = render_to_string('poker/partials/seat_p.html', context)
+    
+    async_to_sync(self.channel_layer.group_send)(
+      self.pokerroom_name, event
+    )
+  
+  def send_start_game(self, event):
+    context = {
+      'link': self.pokerroom_name
+    }
+    html = render_to_string('poker/partials/start_p.html', context)
     self.send(text_data=html)
