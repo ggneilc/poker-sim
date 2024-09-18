@@ -53,7 +53,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
 
         # parse player and add card to hand
         player = await self.get_BlackjackPlayer(self.user)
-        player.hand.append(card)
+        player.recieveCard(card)
         player.current_hand_value += card.getNum()
         await self.save_DBObject(player)
 
