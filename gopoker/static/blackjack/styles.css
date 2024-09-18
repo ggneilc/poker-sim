@@ -69,13 +69,6 @@ body {
   list-style-type: none;
 }
 
-#card {
-  background-color: #fff;
-  padding: 5px;
-  margin: 5px;
-
-}
-
 button {
   box-sizing: border-box;
   width: 70px;
@@ -88,3 +81,68 @@ h1 {
   color: beige;
 }
 
+/* CARDS */ 
+
+
+#card {
+  height: 150px;
+  width: 80px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.Ace_of_Spades {background: no-repeat center url(../cards/Ace_of_Spades.png)}
+.Two_of_Spades {background:no-repeat center url(../cards/Two_of_Spades.png)}
+.Three_of_Spades {background:no-repeat center url(../cards/Three_of_Spades.png)}
+.Four_of_Spades {background:no-repeat center url(../cards/Four_of_Spades.png)}
+.Five_of_Spades {background:no-repeat center url(../cards/Five_of_Spades.png)}
+.Six_of_Spades {background:no-repeat center url(../cards/Six_of_Spades.png)}
+.Seven_of_Spades {background:no-repeat center url(../cards/Seven_of_Spades.png)}
+.Eight_of_Spades {background:no-repeat center url(../cards/Eight_of_Spades.png)}
+.Nine_of_Spades {background:no-repeat center url(../cards/Nine_of_Spades.png)}
+.Ten_of_Spades { background:no-repeat center url(../cards/Ten_of_Spades.png)}
+.Jack_of_Spades {background:no-repeat center url(../cards/Jack_of_Spades.png)}
+.Queen_of_Spades {background:no-repeat center url(../cards/Queen_of_Spades.png)}
+.King_of_Spades {background:no-repeat center url(../cards/King_of_Spades.png)}
+
+.Ace_of_Hearts {background:no-repeat center url(../cards/Ace_of_Hearts.png)}
+.Two_of_Hearts {background:no-repeat center url(../cards/Two_of_Hearts.png)}
+.Three_of_Hearts {background:no-repeat center url(../cards/Three_of_Hearts.png)}
+.Four_of_Hearts {background:no-repeat center url(../cards/Four_of_Hearts.png)}
+.Five_of_Hearts {background:no-repeat center url(../cards/Five_of_Hearts.png)}
+.Six_of_Hearts {background:no-repeat center url(../cards/Six_of_Hearts.png)}
+.Seven_of_Hearts {background:no-repeat center url(../cards/Seven_of_Hearts.png)}
+.Eight_of_Hearts {background:no-repeat center url(../cards/Eight_of_Hearts.png)}
+.Nine_of_Hearts {background:no-repeat center url(../cards/Nine_of_Hearts.png)}
+.Ten_of_Hearts { background:no-repeat center url(../cards/Ten_of_Hearts.png)}
+.Jack_of_Hearts {background:no-repeat center url(../cards/Jack_of_Hearts.png)}
+.Queen_of_Hearts {background:no-repeat center url(../cards/Queen_of_Hearts.png)}
+.King_of_Hearts {background:no-repeat center url(../cards/King_of_Hearts.png)}
+
+.Ace_of_Clubs {background:no-repeat center url(../cards/Ace_of_Clubs.png)}
+.Two_of_Clubs {background:no-repeat center url(../cards/Two_of_Clubs.png)}
+.Three_of_Clubs {background:no-repeat center url(../cards/Three_of_Clubs.png)}
+.Four_of_Clubs {background:no-repeat center url(../cards/Four_of_Clubs.png)}
+.Five_of_Clubs {background:no-repeat center url(../cards/Five_of_Clubs.png)}
+.Six_of_Clubs {background:no-repeat center url(../cards/Six_of_Clubs.png)}
+.Seven_of_Clubs {background:no-repeat center url(../cards/Seven_of_Clubs.png)}
+.Eight_of_Clubs {background:no-repeat center url(../cards/Eight_of_Clubs.png)}
+.Nine_of_Clubs {background:no-repeat center url(../cards/Nine_of_Clubs.png)}
+.Ten_of_Clubs { background:no-repeat center url(../cards/Ten_of_Clubs.png)}
+.Jack_of_Clubs {background:no-repeat center url(../cards/Jack_of_Clubs.png)}
+.Queen_of_Clubs {background:no-repeat center url(../cards/Queen_of_Clubs.png)}
+.King_of_Clubs {background:no-repeat center url(../cards/King_of_Clubs.png)}
+
+.Ace_of_Diamonds {background:no-repeat center url(../cards/Ace_of_Diamonds.png)}
+.Two_of_Diamonds {background:no-repeat center url(../cards/Two_of_Diamonds.png)}
+.Three_of_Diamonds {background:no-repeat center url(../cards/Three_of_Diamonds.png)}
+.Four_of_Diamonds {background:no-repeat center url(../cards/Four_of_Diamonds.png)}
+.Five_of_Diamonds {background:no-repeat center url(../cards/Five_of_Diamonds.png)}
+.Six_of_Diamonds {background:no-repeat center url(../cards/Six_of_Diamonds.png)}
+.Seven_of_Diamonds {background:no-repeat center url(../cards/Seven_of_Diamonds.png)}
+.Eight_of_Diamonds {background:no-repeat center url(../cards/Eight_of_Diamonds.png)}
+.Nine_of_Diamonds {background:no-repeat center url(../cards/Nine_of_Diamonds.png)}
+.Ten_of_Diamonds { background:no-repeat center url(../cards/Ten_of_Diamonds.png)}
+.Jack_of_Diamonds {background:no-repeat center url(../cards/Jack_of_Diamonds.png)}
+.Queen_of_Diamonds {background:no-repeat center url(../cards/Queen_of_Diamonds.png)}
+.King_of_Diamonds {background:no-repeat center url(../cards/King_of_Diamonds.png)}

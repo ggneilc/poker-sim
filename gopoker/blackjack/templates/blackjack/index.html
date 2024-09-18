@@ -52,16 +52,5 @@
       </div>
 
     </main>
-<script>
-  document.body.addEventListener('htmx:wsAfterMessage', function(evt) {
-    var message = JSON.parse(evt.detail.message);
-    if (message.html && message.target) {
-      var target = document.querySelector(message.target);
-      if (target) {
-        htmx.innerHTML(target, message.html, 'beforeend');
-      }
-    }
-  });
-</script>
   </body>
 </html>

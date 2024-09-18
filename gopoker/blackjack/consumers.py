@@ -63,8 +63,8 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
 
         context = {
             "target": 'player',
-            "num": card.getNum(),
-            "suit": card.getSuit(),
+            "num": card.getNumString(),
+            "suit": card.getSuitString(),
             "card": card.toString()
         }
 
@@ -93,8 +93,8 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
 
         context = {
             "target": 'dealer',
-            "num": card.getNum(),
-            "suit": card.getSuit(),
+            "num": card.getNumString(),
+            "suit": card.getSuitString(),
             "card": card.toString()
         }
 

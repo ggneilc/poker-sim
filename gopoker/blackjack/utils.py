@@ -23,9 +23,9 @@ class Card:
     def getNumString(self):
         switch = {
             '1': 'Ace',
-            '2': '2', '3': '3', '4': '4',
-            '5': '5', '6': '6', '7': '7',
-            '8': '8', '9': '9', '10': '10',
+            '2': 'Two', '3': 'Three', '4': 'Four',
+            '5': 'Five', '6': 'Six', '7': 'Seven',
+            '8': 'Eight', '9': 'Nine', '10': 'Ten',
             '11': 'Jack',
             '12': 'Queen',
             '13': 'King',

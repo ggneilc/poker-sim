@@ -1,9 +1,10 @@
+{% load static %}
 {% if target == 'player'%}
 <div id="player-cards" hx-swap-oob="beforeend">
-  <li id="card">{{ card }} </li>
+  <li id="card" class="{{num}}_of_{{suit}}"></li>
 </div>
 {% elif target == 'dealer' %}
 <div id="dealer-cards" hx-swap-oob="beforeend">
-  <li id="card" > {{ card }} </li>
+  <li id="card" class="{{num}}_of_{{suit}}"> </li>
 </div>
 {% endif %}
