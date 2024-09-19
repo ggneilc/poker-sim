@@ -81,3 +81,12 @@ def leave_room(request, room_id):
     response = HttpResponse()
     response['HX-redirect'] = r'/'
     return response
+
+def reset_Deck(request, room_id):
+    '''dev: reset deck in a room'''
+    room = BlackjackRoom.objects.get(link=room_id)
+    deck = Deck()
+    deck.shuffle()
+    room.deck = json.dumps(deck.to_dict())
+    room.save()
+    return HttpResponse()

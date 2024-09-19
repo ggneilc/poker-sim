@@ -45,10 +45,38 @@ body {
   grid-column-start: 3;
 }
 
+button {
+  box-sizing: border-box;
+  width: 70px;
+  height: 40px;
+  padding: 2px;
+  margin: 5px;
+}
+
+h1 {
+  color: beige;
+}
+
+/* ------------ Player Action ------------ */ 
+
 .player-action {
+  background-color: white;
   grid-row-start: 5;
   grid-column-start: 3;
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
 }
+
+.player-action.htmx-added {
+  opacity: 0;
+}
+
+.player-action.htmx-swapping {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+/* ------------ CARDS ------------ */ 
 
 #dealer-card-holder {
   grid-column: 2 / 5;
@@ -68,27 +96,24 @@ body {
   list-style-type: none;
 }
 
-button {
-  box-sizing: border-box;
-  width: 70px;
-  height: 40px;
-  padding: 2px;
-  margin: 5px;
-}
-
-h1 {
-  color: beige;
-}
-
-
-/* CARDS */ 
-
-
-#card {
+.card {
+  position: relative;
   height: 100px;
   width: 80px;
   padding: 5px;
   margin: 5px;
+  animation: fall 0.5s ease-out
+}
+
+@keyframes fall {
+  0% {
+    top: -800px; /* Start above the screen */
+    opacity: 0;
+  }
+  100% {
+    top: 0; /* End at its normal position */
+    opacity: 1;
+  }
 }
 
 .Ace_of_Spades {background:url(../cards/Ace_of_Spades.png)no-repeat center  / cover}
