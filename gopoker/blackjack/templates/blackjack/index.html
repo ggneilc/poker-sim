@@ -19,6 +19,7 @@
         <div id="logo"> </div>
       </a>
       <button hx-post="{% url 'bj:leave' room.link %}"> leave room </button>
+      <button hx-post="{% url 'bj:reset' room.link %}"> Reset Cards </button>
     </nav>
 
     <main id="game-container" 
@@ -46,7 +47,8 @@
           <button 
             hx-post="{% url 'bj:join' room.link %}" 
             hx-target="#player" 
-            hx-include="closest div">
+            hx-include="closest div"
+            hx-swap="outerHTML swap:1s">
           join </button>
         </div>
       </div>

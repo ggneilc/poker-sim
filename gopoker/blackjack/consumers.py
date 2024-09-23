@@ -51,32 +51,35 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         deck = Deck.from_dict(deck_dict)
         card = deck.deal()
 
-        # parse player and add card to hand
-        player = await self.get_BlackjackPlayer(self.user)
-        player.recieveCard(card)
-        player.current_hand_value += card.getNum()
-        await self.save_DBObject(player)
+        if card is not None:
+            # parse player and add card to hand
+            player = await self.get_BlackjackPlayer(self.user)
+            player.recieveCard(card)
+            player.current_hand_value += card.getNum()
+            await self.save_DBObject(player)
 
-        # update the rooms deck for the removed card
-        self.room.deck = json.dumps(deck.to_dict())
-        await self.save_DBObject(self.room)
+            # update the rooms deck for the removed card
+            self.room.deck = json.dumps(deck.to_dict())
+            await self.save_DBObject(self.room)
 
-        context = {
-            "target": 'player',
-            "num": card.getNumString(),
-            "suit": card.getSuitString(),
-            "card": card.toString()
-        }
-
-        html = render_to_string('blackjack/card.html', context)
-
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'html_message',
-                'html': html
+            context = {
+                "target": 'player',
+                "num": card.getNumString(),
+                "suit": card.getSuitString(),
+                "card": card.toString()
             }
-        )
+
+            html = render_to_string('blackjack/card.html', context)
+
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'html_message',
+                    'html': html
+                }
+            )
+        else:
+            pass
 
     async def handle_stand(self, player):
         '''handle a player standing'''

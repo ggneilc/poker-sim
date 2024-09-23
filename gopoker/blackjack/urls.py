@@ -7,4 +7,5 @@ urlpatterns = [
     path('room/<room_id>/', views.display_room, name="room"),
     path('room/<room_id>/join', views.join_room, name="join"),
     path('room/<room_id>/leave', views.leave_room, name="leave"),
+    path('room/<room_id>/reset', views.reset_Deck, name="reset"),
 ]
