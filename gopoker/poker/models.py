@@ -22,17 +22,15 @@ class PokerPlayer(models.Model):
         self.hand.clear
 
     def __str__(self):
-        return f"{super().__str__()} - Stack: {self.stack}"
+        return f"{self.player.__str__()} - Stack: {self.stack}"
 
 
 class PokerRoom(Room):
     # Additional fields and methods specific to Poker rooms
     deck = models.JSONField(default=list, blank=True)
-    player_queue = None
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.player_queue = []
 
 
 class PokerMessages(models.Model):

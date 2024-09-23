@@ -75,10 +75,35 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'gopoker.asgi.application'
 
+# CHANNEL_LAYERS = {
+#   'default': {
+#     "BACKEND": "channels.layers.InMemoryChannelLayer",
+#   }
+# }
+
+# Redis configuration
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+
+# Channel layer configuration
 CHANNEL_LAYERS = {
-  'default': {
-    "BACKEND": "channels.layers.InMemoryChannelLayer",
-  }
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(REDIS_HOST, REDIS_PORT)],
+        },
+    },
+}
+
+# Cache configuration
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
 }
 
 

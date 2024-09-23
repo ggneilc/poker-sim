@@ -7,7 +7,12 @@ shoe = [d1.shuffle(), d2.shuffle(), ..., d6.shuffle()]
 # index shoe in the same way we index deck!
 '''
 import random, time
-from enum import Enum, auto
+from enum import Enum, auto# utils.py
+from django.core.cache import cache
+from django.contrib.auth.models import User
+from core.models import Player
+from poker.models import *
+import json
 
 random.seed(time.time())
 
@@ -75,8 +80,6 @@ class Deck:
         card = self.cards.pop(index)
         return card
 
-
-
     def shuffle(self):
         '''Initialize a new deck of cards'''              
         self.cards = []
@@ -106,81 +109,32 @@ class Deck:
             'count': self.count,
             'cards': [card.to_dict() for card in self.cards]
         }
-
-
-
-
-class Player:
-    """Player has a hand, score, and outcome [win (True)/loss (False)]"""
-    def __init__(self):
-        self.hand = []
-        self.score = 0
-        self.outcome = False
-        self.action = False
-
-    def recieveCard(self, card: 'Card'):
-        self.hand.append(card)
-
-    def resetHand(self):
-        self.hand.clear()
-
-    def updateScore(self, x):
-        """if they lose x is negative, win x is positive"""
-        self.score += x
-
-    def win(self):
-        self.outcome = True
-
-    def lose(self):
-        self.outcome = False
-
-    def toString(self):
-        d = f"Score: {self.score}\nHand: "
-        for x in self.hand:
-            d = d + x.toString() + " "
-        return d
     
+# Model Retrieval methods
+# def get_poker_player(player):
+#     # user = User.objects.get(username=username)
+#     # player = Player.objects.get(user=user)
+#     pokerplayer = PokerPlayer.objects.get(player=player)
+#     return pokerplayer
 
+# Player Queue Helper Methods
+def get_room_queue_key(room_id):
+    return f"player_queue_{room_id}"
 
+def add_player_to_queue(room_id, player):
+    key = get_room_queue_key(room_id)
+    queue = cache.get(key, [])
+    if player not in queue:
+        queue.append(player)
+        cache.set(key, queue)
 
-class GameStatus(Enum):
-    SETUP = 1
-    IN_PROGRESS = 2
-    PAUSED = 3
-    STOPPED = 4
+def remove_player_from_queue(room_id, player):
+    key = get_room_queue_key(room_id)
+    queue = cache.get(key, [])
+    if player in queue:
+        queue.remove(player)
+        cache.set(key, queue)
 
-class Game:
-    def __init__(self):
-        self.status = GameStatus.SETUP
-        self.players = []
-        self.players_in_hand = []
-
-    def start(self):
-        self.status = GameStatus.IN_PROGRESS
-
-    def pause(self):
-        self.status = GameStatus.PAUSED
-
-    def stop(self):
-        self.status = GameStatus.STOPPED
-
-    def newPlayer(self, player: Player):
-        self.players.append(player)
-
-    def newHand(self):
-        for x in self.players:
-            self.players_in_hand.append(x)
-
-    def playerFold(self, player: Player):
-        self.players_in_hand.remove(player)
-
-"""
-Next Steps:
-1. Create game object to keep track of game info
-1.5. write django index page that links to different games (apps)
-(this allows pretty much fully asynchronous work -> then just turn the card/player/deck classes into a python package)
-2. create views to use these methods
-3. write templates to display the toString()s
-"""
-
-# if __name__ == "__main__":
+def get_player_queue(room_id):
+    key = get_room_queue_key(room_id)
+    return cache.get(key, [])

@@ -44,11 +44,11 @@ def displayRoom(request, room_id):
     player = Player.objects.get(user=request.user)
     poker_player, created = PokerPlayer.objects.get_or_create(player=player)
     cur_room = PokerRoom.objects.get(link=room_id)
-    print("DISPLAYING ROOM")
+    player_queue = get_player_queue(room_id)
     context = {
         'room': cur_room,
         'cur_pokerplayer': poker_player,
-        'player_queue': cur_room.player_queue
+        'player_queue': player_queue
     }
     return render(request, 'poker/game.html', context)
 
@@ -70,13 +70,19 @@ def joinRoom(request, room_id):
     pokerplayer.stack = buyin
     pokerplayer.save()
 
+    # Serialize the poker player data to make it JSON-compatible
+    pokerplayer_data = {
+        'pokerplayer_id': pokerplayer.id,  # Get the related poker player's ID
+    }
+
+
     # notify websocket that player joined
     channel_layer = get_channel_layer()
     async_to_sync(channel_layer.group_send)(
         room_id,
         {
             'type': 'player_joined',
-            'pokerplayer': pokerplayer
+            'pokerplayer_data': pokerplayer_data
         }
     )
 
@@ -88,7 +94,6 @@ def joinRoom(request, room_id):
 
     return render(request, 'poker/player.html', context)
 
-
 def leaveRoom(request, room_id):
     '''leave the current room'''
     user = request.user
@@ -98,30 +103,6 @@ def leaveRoom(request, room_id):
     response = HttpResponse()
     response['HX-redirect'] = r'/'
     return response
-
-# Renders a new players seat to the screen
-def renderSeat(request, player_id):
-   print('hey')
-   poker_player = get_object_or_404(PokerPlayer, id=player_id)
-   context = {
-       'poker_player': poker_player
-   }
-   return render(request, 'poker/seat_p.html', context)
-
-# Activated when start game button is clicked
-# Will populate the table felt
-def startGame(request, room_id):
-    # game.status = GameStatus.IN_PROGRESS
-    # This should initiate the gameplay loop
-    context = {
-        'button': render(request, 'poker/stop.html').content.decode(),
-        'board': render(request, 'poker/felt.html').content.decode(),
-        'info': render(request, 'poker/player_options.html').content.decode(),
-        'link': room_id
-    }
-    return render(request, 'poker/start.html', context)
-
-# TODO Establish rooms
 
 def pauseGame(request):
     # game.status = GameStatus.PAUSED

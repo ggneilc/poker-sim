@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from asgiref.sync import async_to_sync
 from .models import *
+from poker.utils import *
 import json
 
 class PokerroomConsumer(WebsocketConsumer):
@@ -101,14 +102,13 @@ class PokerroomConsumer(WebsocketConsumer):
 
   # SEAT HANDLING
   def player_joined(self, data):
-    pokerplayer = data['pokerplayer']
-    self.pokerroom.player_queue.append(pokerplayer)
-    self.pokerroom.save()
-
+    pokerplayer_id = data['pokerplayer_data']['pokerplayer_id']
+    pokerplayer = PokerPlayer.objects.get(id=pokerplayer_id)
+    add_player_to_queue(self.pokerroom_name, pokerplayer)
+    
     event = {
       'type': 'render_seat',
-      'pokerplayer': data['pokerplayer'],
-      'sender_channel_name': self.channel_name
+      'pokerplayer_id': pokerplayer_id
     }
 
     async_to_sync(self.channel_layer.group_send)(
@@ -116,11 +116,17 @@ class PokerroomConsumer(WebsocketConsumer):
     )
   
   def render_seat(self, event):
-    if self.channel_name != event['sender_channel_name']: 
-      pokerplayer = event['pokerplayer']
-      seatnum = len(self.pokerroom.player_queue)
+    pokerplayer_id = event['pokerplayer_id']
+    pokerplayer = PokerPlayer.objects.get(id=pokerplayer_id)
+
+    # Renders the seat to everyone but the user who made the request
+    if self.user.username != pokerplayer.player.user.username:
+      queue = get_player_queue(self.pokerroom_name)
+      seatnum = len(queue)-1
+
       context = {
-        'newpokerplayer': pokerplayer,
+        'username': pokerplayer.player.user.username,
+        'stack': pokerplayer.stack,
         'seatnum': seatnum
       }
       html = render_to_string('poker/partials/seat_p.html', context)
