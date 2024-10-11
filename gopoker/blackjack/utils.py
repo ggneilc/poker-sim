@@ -1,5 +1,4 @@
-'''
-How to random: int(time.Now()) % 10 and subtract from randint.(52), then move to closest next available index (think hash map collision dection). This gives a temporary random that is better than a uniform distribution
+''' How to random: int(time.Now()) % 10 and subtract from randint.(52), then move to closest next available index (think hash map collision dection). This gives a temporary random that is better than a uniform distribution
 
 We can also create games like blackjack with more decks in a similar fashion: 
 d1,d2,d3,d4,d5,d6 = Deck()
@@ -75,8 +74,8 @@ class Deck:
 
     def deal(self):
         '''Deal a single card to a player'''
-        index = random.randint(1,52) - (int(time.time()) % 10) # random number
-        if index > len(self.cards)-1:                     # boundaries
+        index = random.randint(1, 52) - (int(time.time()) % 10)
+        if index > len(self.cards)-1:
             index = len(self.cards) - 2
         elif index < 0:
             index = 0
@@ -84,26 +83,27 @@ class Deck:
         self.cards.pop(index)
         return card
 
-
-
     def shuffle(self):
-        '''Initialize a new deck of cards'''              
+        '''Initialize a new deck of cards'''
         self.cards = []
-        for i in range(1, 14): # Hearts 
+        for i in range(1, 14):  # Hearts
             card = Card(i, 1)
             self.cards.append(card)
-        for i in range(1, 14): # Diamonds
+        for i in range(1, 14):  # Diamonds
             card = Card(i, 2)
             self.cards.append(card)
-        for i in range(1, 14): # Spades
+        for i in range(1, 14):  # Spades
             card = Card(i, 3)
             self.cards.append(card)
-        for i in range(1, 14): # Clubs
+        for i in range(1, 14):  # Clubs
             card = Card(i, 4)
             self.cards.append(card)
 
         # random literally has .shuffle()
         random.shuffle(self.cards)
+
+    def size(self) -> int:
+        return len(self.cards)
 
     def toString(self):
         print(f"Remaining Cards: {len(self.cards)}\n")

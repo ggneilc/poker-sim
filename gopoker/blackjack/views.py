@@ -47,6 +47,7 @@ def display_room(request, room_id):
 #   Find the user's BlackjackPlayer 'account'
 #   If not yet created, create it
 #   else, update the player's buyin
+#   notify websocket to add player to queue
 def join_room(request, room_id):
     '''create blackjackplayer in room (sit down at table)'''
     room = BlackjackRoom.objects.get(link=room_id)
@@ -81,6 +82,7 @@ def leave_room(request, room_id):
     response = HttpResponse()
     response['HX-redirect'] = r'/'
     return response
+
 
 def reset_Deck(request, room_id):
     '''dev: reset deck in a room'''

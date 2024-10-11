@@ -1,0 +1,30 @@
+{% load static %}
+{% if type == 'betting' %}
+<div id="game_state_message" hx-swap-oob="innerHTML">
+  <h2> Place Bets </h2>
+</div>
+{% elif type == 'betting_complete' %}
+<div id="game_state_message" hx-swap-oob="innerHTML">
+  <h2> Betting Complete </h2>
+</div>
+{% elif type == 'dealing' %}
+<div id="game_state_message" hx-swap-oob="innerHTML">
+  <h2> Dealing cards </h2>
+</div>
+{% elif type == 'paction' %}
+<div id="game_state_message" hx-swap-oob="innerHTML">
+  <h2> hit or stand </h2>
+</div>
+{% elif type == 'daction' %}
+<div id="game_state_message" hx-swap-oob="innerHTML">
+  <h2> dealer hits up to 17 </h2>
+</div>
+{% elif type == 'end' %}
+<div id="game_state_message" hx-swap-oob="innerHTML">
+  <h2> determining winner </h2>
+</div>
+{% elif type == 'reset' %}
+<div id="game_state_message" hx-swap-oob="innerHTML">
+  <h2> Preparing new round </h2>
+</div>
+{% endif %}

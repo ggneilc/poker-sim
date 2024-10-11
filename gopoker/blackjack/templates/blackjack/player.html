@@ -1,5 +1,7 @@
 <div id="player" class="player-action">
-	{{name}} | {{chips}}
+  <div class="player-info">
+    {{name}} | {{chips}}
+  </div>
   <div>
     <button hx-trigger="click"
       ws-send=""
@@ -15,5 +17,17 @@
         "event_type": "stand", 
         "user": "{{user}}"
       }'> Stand </button>
+    <div id="bet">
+      <input name="player-bet" placeholder="Enter Bet">
+      <button hx-trigger="click"
+         hx-include="closest div"
+         ws-send=""
+         hx-vals='js:{
+           "type": "player_action",
+           "event_type": "bet", 
+           "user": "{{user}}",
+            "bet_amt": parseInt(document.querySelector("input[name=player-bet]").value)
+      }'> Place Bet </button>
+    </div>
   </div>
 </div>
