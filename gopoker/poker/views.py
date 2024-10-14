@@ -67,12 +67,13 @@ def joinRoom(request, room_id):
 
     # get the players' PokerPlayer
     pokerplayer = PokerPlayer.objects.get(player=player)
+    pokerplayer.buyin = buyin
     pokerplayer.stack = buyin
     pokerplayer.save()
 
     # Serialize the poker player data to make it JSON-compatible
-    pokerplayer_data = {
-        'pokerplayer_id': pokerplayer.id,  # Get the related poker player's ID
+    user_data = {
+        'user_id': user.id,  # Get the related poker player's ID
     }
 
 
@@ -81,8 +82,8 @@ def joinRoom(request, room_id):
     async_to_sync(channel_layer.group_send)(
         room_id,
         {
-            'type': 'player_joined',
-            'pokerplayer_data': pokerplayer_data
+            'type': 'handle_player_joined',
+            'user_data': user_data
         }
     )
 

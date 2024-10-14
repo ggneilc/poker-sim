@@ -9,6 +9,7 @@ class PokerPlayer(models.Model):
                                   related_name="poker_player")
     host = models.BooleanField(default=False)
     stack = models.IntegerField(default=0)
+    buyin = models.IntegerField(default=0)
     hand = None
 
     def __init__(self, *args, **kwargs):

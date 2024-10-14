@@ -128,19 +128,23 @@
                 </div> -->
             </div>
     
-            <div class="ledger">
+            <div id="ledger" class="ledger">
                 <div class="ledgerheader">
                     <div class="namecolumn">NAME</div>
                     <div class="buyincolumn">BUY-IN</div>
                     <div class="stackcolumn">STACK</div>
                     <div class="netcolumn">NET</div>
                 </div>
-                <!-- <div class="ledgerlog">
-                    <div class="namecolumn">{{.Username}}</div>
-                    <div class="buyincolumn">{{.buyIn}}</div>
-                    <div class="stackcolumn">{{.Money}}</div>
-                    <div class="netcolumn">{{.netMoney}}</div>
-                </div> -->
+
+                {% for pplayer in player_queue %}
+                    <div class="ledgerlog">
+                        <div class="namecolumn">{{pplayer.player.user.username}}</div>
+                        <div class="buyincolumn">{{pplayer.buyin}}</div>
+                        <div class="stackcolumn">{{pplayer.stack}}</div>
+                        <div class="netcolumn">0</div>
+                    </div>
+                {% endfor %}
+
             </div>
         </div>
 
