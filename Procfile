@@ -1,1 +1,1 @@
-web: gunicorn gopoker.gopoker.wsgi --log-file -
+web: gunicorn --chdir gopoker gopoker.wsgi --log-file -
