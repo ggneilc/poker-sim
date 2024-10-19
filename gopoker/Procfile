@@ -1,1 +1,0 @@
-web: gunicorn gopoker.wsgi --log-file -
