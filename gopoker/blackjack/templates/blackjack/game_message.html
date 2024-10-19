@@ -1,7 +1,7 @@
 {% load static %}
 {% if type == 'betting' %}
 <div id="game_state_message" hx-swap-oob="innerHTML">
-  <h2> Place Bets </h2>
+  <div class="place_bet"></div>
 </div>
 {% elif type == 'betting_complete' %}
 <div id="game_state_message" hx-swap-oob="innerHTML">

@@ -46,13 +46,21 @@ body {
 }
 
 #game_state_message {
-  background-color: #fff;
   opacity: 0.7;
   grid-row-start: 2;
   grid-column-start: 3;
 
   position: relative;
   animation: fall 0.5s ease-out;
+}
+
+/* ------------ Game messages ------------ */ 
+
+.place_bet {
+  background: center url(../blackjack/place_bet.png);
+  width: 600px;
+  height: 200px;
+  opacity: 0.7;
 }
 
 button {
@@ -68,7 +76,7 @@ h1 {
 }
 
 h2 {
-  color: yellow;
+  color: black;
 }
 
 /* ------------ Player Action ------------ */ 
@@ -77,6 +85,9 @@ h2 {
   grid-row-start: 5;
   grid-column-start: 3;
   grid-column-end: 4;
+
+  height: 350px;
+  width: 900;
 
   background-color: white;
   border-radius: 2px;
@@ -101,6 +112,42 @@ h2 {
   opacity: 0;
   transition: opacity 0.5s ease-out;
 }
+
+/* ------------ seating ------------ */ 
+
+#player2 {
+  grid-row: 4 / 4;
+  grid-column: 2 / 2;
+  width:100px;
+  height:100px;
+
+  background-color: white;
+  border-radius: 10px;
+
+  text-align: center;
+}
+#player2-cards {
+  grid-row: 3 / 3;
+  grid-column: 2 / 2;
+}
+
+#player3 {
+  grid-row: 4 / 4;
+  grid-column: 4 / 4;
+  width:100px;
+  height:100px;
+
+  background-color: white;
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+#player3-cards {
+  grid-row: 3 / 3;
+  grid-column: 4 / 4;
+}
+
 
 /* ------------ CARDS ------------ */ 
 

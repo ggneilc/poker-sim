@@ -36,6 +36,13 @@
           <div id="dealer-cards"></div>
         </div>
 
+
+        <div id="player2"></div>
+        <div id="player2-cards"></div>
+
+        <div id="player3"></div>
+        <div id="player3-cards"></div>
+
         <div id="player-card-holder">
           <div id="player-cards"> 
 
@@ -43,12 +50,12 @@
         </div>
 
 
-        <div id="player" class="player-action">
+        <div id="player1" class="player-action">
           <input name="uname" placeholder="Enter Name:" value="{{user.username}}">
           <input name="buyin" placeholder="Buy-in:">
           <button 
             hx-post="{% url 'bj:join' room.link %}" 
-            hx-target="#player" 
+            hx-target="#player1" 
             hx-include="closest div"
             hx-swap="outerHTML swap:1s">
           join </button>
