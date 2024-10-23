@@ -67,6 +67,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
             await self.redis.srem(f'{self.room_channel}_players', self.user_id)
             await self.redis.hdel('user_channel_map', self.user_id)
             self.listening.cancel()
+            await self.listening
             print("stopped listening")
 
             # reset the players' info -> we already removed them so reset won't
@@ -231,6 +232,23 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         context = {'type': 'reset'}
         html = render_to_string('blackjack/game_message.html', context)
         await self.redis.publish(self.room_channel, json.dumps({'html': html}))
+
+        # Update player chips
+        user_ids = await self.redis.smembers(f'{self.room_channel}_active_players')
+        for user_id in user_ids:
+            user = await self.get_UserObject(user_id)
+            user_channel = await self.redis.hget('user_channel_map', user_id)
+            print(f'{user_id} {user} {user_channel}')
+            bjplayer = await self.get_BlackjackPlayer(user)
+            context = {'name': user.username, 'chips': bjplayer.chips}
+            html = render_to_string('blackjack/player.html', context)
+            await self.channel_layer.send(
+                user_channel.decode('utf-8'),
+                {
+                    'type': 'html_message',
+                    'html': html
+                }
+            )
 
         await self.redis.delete(
             f'{self.room_channel}_bets',
