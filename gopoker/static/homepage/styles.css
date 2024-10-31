@@ -57,6 +57,25 @@ li > a:hover {
 }
 
 
+li > button {
+  background-color: #111;
+  color: #fff;
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 24px;
+  align-content: center;
+  border-radius: 20px;
+}
+
+li > button:hover {
+  color: #000;
+  background-color: rgba(200,200,200, 0.5);
+}
+
 /*--- starting main section ---*/
 
 main {
