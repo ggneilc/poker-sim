@@ -67,6 +67,7 @@ def join_room(request, room_id):
         'room': room,
         'name': user.username,
         'chips': buyin,
+        'user': user
     }
     return render(request, 'blackjack/player.html', context)
 

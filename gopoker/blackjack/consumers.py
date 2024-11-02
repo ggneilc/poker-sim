@@ -21,7 +21,6 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         self.room_channel = None
         # Conveience Variables
         self.seats = None
-
         # Asyncio Tasks toKill
         self.game_task = None
         self.listening = None
@@ -33,11 +32,9 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         '''user connects to room'''
         self.user = self.scope['user']
         self.user_id = self.user.id
-
         self.room_id = self.scope['url_route']['kwargs']['room_id']
         self.room = await self.get_BlackjackRoom(self.room_id)
         self.room_channel = f'blackjack_{self.room_id}'
-
         # Join Room Group
         await self.channel_layer.group_add(
             self.room_channel,
@@ -50,29 +47,29 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         self.listening = asyncio.create_task(self.listen_for_messages())
         print(f"{self.user} has connected & subscribed")
         print("listening for messages")
-
         # if empty room upon join, start game & set host
         if await self.redis.scard(f'{self.room_channel}_players') == 1:
             # TODO : get host
             self.game_task = asyncio.create_task(self.start_game())
             print("created game task")
-
         # register user channel name to receive personal messages
         await self.redis.hset('user_channel_map', self.user_id, self.channel_name)
+        # publish that a user has joined
+        await self.redis.publish(self.room_channel, json.dumps({'type': 'player_joined'}))
 
     async def disconnect(self, code):
         '''user leaves websocket'''
         try:  # leave redis communication pool
             print("leaving connection pool...")
             try:
-                await self.pubsub.unsubscribe(self.room_channel)
                 await self.redis.srem(f'{self.room_channel}_players', self.user_id)
+                await self.redis.publish(self.room_channel, json.dumps({'type': 'player_left'}))
+                await self.pubsub.unsubscribe(self.room_channel)
                 await self.redis.hdel('user_channel_map', self.user_id)
             except Exception as e:
-                print(f"Error during disconnect: {e}")
+                print(f"Error during connection pool disconnect: {e}")
 
             print("left connection pool")
-            print("canceling listening task...")
             try:
                 self.listening.cancel()
                 await self.listening
@@ -80,14 +77,12 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                 print(f"Error during listening: {e}")
             print("stopped listening")
 
-            print("reseting player")
             # reset the players' info -> we already removed them so reset won't
             bjplayer = await self.get_BlackjackPlayer(self.user)
             bjplayer.current_hand_value = 0
             await self.save_DBObject(bjplayer)
             print("reset player")
 
-            print("killing game")
             # if last player, kill game
             if await self.redis.scard(f'{self.room_channel}_players') == 0:
                 self.game_task.cancel()
@@ -122,7 +117,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                     await self.determine_winner()
                     await asyncio.sleep(3)
                     await self.reset()
-                    await asyncio.sleep(10)
+                    await asyncio.sleep(3)
                 except asyncio.CancelledError:
                     print("game recieved cancellation")
                     raise
@@ -158,7 +153,8 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         user_ids = await self.redis.smembers(f'{self.room_channel}_active_players')
         # deal 2 cards to each active player
         for user_id in user_ids:
-            user = await self.get_UserObject(user_id)
+            user = await self.get_UserObject(id=user_id)
+            print(f'dealing card to {user} with id {user_id}')
             await self.deal_card(user, user_id)
             await self.deal_card(user, user_id)
 
@@ -210,7 +206,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
             # parse players in the hand and payout chips
             user_ids = await self.redis.smembers(f'{self.room_channel}_active_players')
             for user_id in user_ids:
-                user = await self.get_UserObject(int(user_id))
+                user = await self.get_UserObject(id=int(user_id))
                 bjplayer = await self.get_BlackjackPlayer(user)
                 print(f'player_hand : {bjplayer.current_hand_value}')
                 # player wins
@@ -228,7 +224,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
             # parse players in the hand and payout chips
             user_ids = await self.redis.smembers(f'{self.room_channel}_active_players')
             for user_id in user_ids:
-                user = await self.get_UserObject(int(user_id))
+                user = await self.get_UserObject(id=int(user_id))
                 bjplayer = await self.get_BlackjackPlayer(user)
                 # player wins
                 payout = int(bjplayer.curr_bet) * 2
@@ -245,11 +241,11 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         # Update player chips
         user_ids = await self.redis.smembers(f'{self.room_channel}_active_players')
         for user_id in user_ids:
-            user = await self.get_UserObject(user_id)
+            user = await self.get_UserObject(id=user_id)
             user_channel = await self.redis.hget('user_channel_map', user_id)
             print(f'{user_id} {user} {user_channel}')
             bjplayer = await self.get_BlackjackPlayer(user)
-            context = {'name': user.username, 'chips': bjplayer.chips}
+            context = {'name': user.username, 'chips': bjplayer.chips, 'user': user}
             html = render_to_string('blackjack/player.html', context)
             await self.channel_layer.send(
                 user_channel.decode('utf-8'),
@@ -286,6 +282,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         if message_type == 'player_action':
             event_type = data.get('event_type')
             user = data.get('user')
+            print(user)
             # process different events
             if event_type == "hit":
                 await self.handle_hit(user)
@@ -295,8 +292,9 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                 bet_amt = data.get('player-bet')
                 await self.handle_bet(user, bet_amt)
 
-    async def handle_bet(self, user, bet):
+    async def handle_bet(self, username, bet):
         '''handle a players bet'''
+        user = await self.get_UserObject(username=username)
         player = await self.get_BlackjackPlayer(user)
         bet = int(bet)  # comes from json as string
         # TODO : return snippet saying not enough chips
@@ -313,8 +311,9 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         await self.redis.sadd(f'{self.room_channel}_bets', int(bet))
         # update frontend player chips
         context = {
-            'name': self.user.username,
-            'chips': player.chips
+            'name': user.username,
+            'chips': player.chips,
+            'user': user
         }
         html = render_to_string('blackjack/player.html', context)
         await self.channel_layer.send(
@@ -325,23 +324,27 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
             }
         )
 
-    async def handle_hit(self, player):
+    async def handle_hit(self, username):
         '''handle a player hitting'''
         # Parse json representation of deck
         card, face = await self.get_card()
         # parse player and add card to hand
-        player = await self.get_BlackjackPlayer(self.user)
+        print(username)
+        user = await self.get_UserObject(username=username)
+        player = await self.get_BlackjackPlayer(user)
         player.recieveCard(card)
+        print(f"{player} associated with {user.username} has {player.current_hand_value}")
         await self.save_DBObject(player)
-        await self.send_card('player', card, face, user_id=self.user_id)
+        await self.send_card('player', card, face, user_id=user.id)
         # handle player busting : leave the active_players
         if (player.current_hand_value > 21):  # player busts
-            await self.redis.srem(f'{self.room_channel}_active_players', self.user_id)
+            await self.redis.srem(f'{self.room_channel}_active_players', user.id)
 
-    async def handle_stand(self, player):
+    async def handle_stand(self, username):
         '''handle a player standing (deal card to dealer)'''
         # register player as stood
-        await self.redis.sadd(f'{self.room_channel}_stood', self.user_id)
+        user = await self.get_UserObject(username=username)
+        await self.redis.sadd(f'{self.room_channel}_stood', user.id)
 
     async def deal_card(self, user, user_id):
         '''deal a card to a specific user'''
@@ -361,6 +364,22 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         self.room.dealer_score += card.getNum()
         await self.send_card('dealer', card, face, channel=self.room_channel)
 
+    def calculate_seat_map(self, user, user_ids):
+        '''calculate arrangement of seats around user'''
+        user_ids = {int(uid.decode('utf-8')) for uid in user_ids}
+        user = int(user.decode('utf-8')) if isinstance(user, bytes) else user
+        ordered_ids = list(user_ids)
+        ordered_ids.remove(user)
+        ordered_ids.insert(0, user)
+
+        seat_map = {}
+        # start at 1,2,3
+        for idx, user_id in enumerate(ordered_ids):
+            seat_map[user_id] = f'player{idx+1}'
+
+        print(seat_map)
+        return seat_map
+
     async def listen_for_messages(self):
         '''process redis pub/sub message'''
         try:
@@ -369,8 +388,15 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                     message = await self.pubsub.get_message(ignore_subscribe_messages=True)
                     if message:
                         decoded_message = json.loads(message['data'].decode('utf-8'))
-                        # Now you can access the 'html' key
-                        await self.send(text_data=decoded_message['html'])
+
+                        if 'type' in decoded_message and (decoded_message.get('type') == 'player_joined' or decoded_message.get('type') == 'player_left'):
+                            print("new player joined")
+                            user_ids = await self.redis.smembers(f'{self.room_channel}_players')
+                            self.seats = self.calculate_seat_map(self.user_id, user_ids)
+                            await self.redis.hset(f'{self.room_channel}_seats', self.user_id, json.dumps(self.seats))
+                            print("calculated seat map")
+                        elif 'html' in decoded_message:
+                            await self.send(text_data=decoded_message['html'])
                     await asyncio.sleep(0.1)  # prevent tight loop -> Allows cancelation
                 except asyncio.CancelledError:
                     print("Listen task received cancellation")
@@ -381,51 +407,6 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         except asyncio.CancelledError:
             print("Listen task clean up")
 
-    # TODO : add personalized html messages
-    async def calc_seat_arrangement(self, user, user_ids):
-        '''calculate arrangement of seats around user'''
-        ordered_ids = list(user_ids)
-        ordered_ids.remove(user)
-        ordered_ids.insert(0, user)
-
-        seat_map = {}
-        # start at 1,2,3
-        for idx, user_id in enumerate(ordered_ids):
-            seat_map[user_id] = f'player{idx+1}'
-
-        return seat_map
-
-    async def personalized_view(self, user, users):
-        '''builds the personalized html view for user'''
-        seat_assignments = {}
-        seat_assignments = await self.calc_seat_arrangement(user, users)
-
-        user = self.get_UserObject(user)
-        player = self.get_BlackjackPlayer(user)
-
-        # Build player action
-        context = {
-            'target': seat_assignments[user],
-            'name': user.username,
-            'chips': player.chips
-        }
-
-        html = render_to_string('blackjack/player.html', context)
-        # TODO : send card to specific user instead of group
-        await self.channel_layer.send(
-            self.channel_name, # find user's channel name
-            {
-                'type': 'html_message',
-                'html': html
-            }
-        )
-        # Build seats
-        #        for seat, user_id in seat_assignments:
-        #    context = {
-        #        'target': ,
-        #        'name': user.username,
-        #        'chips': player.chips
-        #    }
 
     async def game_message(self, event):
         '''send message to websocket'''
@@ -435,26 +416,38 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         '''sends html to the websocket client'''
         await self.send(text_data=event['html'])
 
+    # Channel is to broadcast for dealer hitting
+    # user-id is used for hitting and initial deal
     async def send_card(self, target, card, face, channel=None, user_id=None):
-        context = {
-            "target": target,
-            "num": face,
-            "suit": card.getSuitString(),
-            "card": card.toString()
-        }
-
-        html = render_to_string('blackjack/card.html', context)
-
-        if user_id:  # Personal Message
-            uchannel = await self.redis.hget('user_channel_map', user_id)
-            await self.channel_layer.send(
-                uchannel.decode('utf-8'),
-                {
-                    'type': 'html_message',
-                    'html': html
+        if user_id:  # Personal Message -> this player is main player
+            seats = await self.get_seat_map(user_id)
+            print(f'retrived seat map: {seats}')
+            for id, target in seats.items():  # populate template and send to specific user channel
+                print(f'got id {id} and sending to {target}')
+                uchannel = await self.redis.hget('user_channel_map', id)
+                # if target != player1, send mini card
+                context = {
+                    "target": target,
+                    "num": face,
+                    "suit": card.getSuitString(),
+                    "card": card.toString()
                 }
-            )
+                html = render_to_string('blackjack/card.html', context)
+                await self.channel_layer.send(
+                    uchannel.decode('utf-8'),
+                    {
+                        'type': 'html_message',
+                        'html': html
+                    }
+                )
         else:  # Group Message
+            context = {
+                "target": target,
+                "num": face,
+                "suit": card.getSuitString(),
+                "card": card.toString()
+            }
+            html = render_to_string('blackjack/card.html', context)
             await self.channel_layer.group_send(
                 channel,
                 {
@@ -472,24 +465,29 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
             deck.shuffle()
             self.room.deck = json.dumps(deck.to_dict())
             await self.save_DBObject(self.room)
-
         card = deck.deal()
         face = card.getNumString()
         # Face cards all equal 10
         if (card.getNum() > 10):
             card.num = 10
-
         self.room.deck = json.dumps(deck.to_dict())
         await self.save_DBObject(self.room)
-
         return card, face
 
+    async def get_seat_map(self, user_id):
+        seat_json = await self.redis.hget(f'{self.room_channel}_seats', user_id)
+        return json.loads(seat_json) if seat_json else None
+
     @database_sync_to_async
-    def get_UserObject(self, id):
+    def get_UserObject(self, id=None, username=None):
         '''Synchronous Database query for BlackjackPlayer'''
         try:
-            p = User.objects.get(id=id)
-            return p
+            if username is not None:
+                p = User.objects.get(username=username)
+                return p
+            if id is not None:
+                p = User.objects.get(id=id)
+                return p
         except User.DoesNotExist:
             return None
 
@@ -497,7 +495,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
     def get_BlackjackPlayer(self, user):
         '''Synchronous Database query for BlackjackPlayer'''
         try:
-            p = Player.objects.get(user=self.user)
+            p = Player.objects.get(user=user)
             player = BlackjackPlayer.objects.get(player=p)
             return player
         except Player.DoesNotExist:
