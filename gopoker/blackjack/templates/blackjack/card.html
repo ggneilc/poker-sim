@@ -5,11 +5,11 @@
 </div>
 {% elif target == 'player2' %}
 <div id="player2-cards" hx-swap-oob="beforeend">
-  <li class="card {{num}}_of_{{suit}}"></li>
+  <li class="minicard Mini_{{num}}_of_{{suit}}"></li>
 </div>
 {% elif target == 'player3' %}
 <div id="player3-cards" hx-swap-oob="beforeend">
-  <li class="card {{num}}_of_{{suit}}"></li>
+  <li class="minicard Mini_{{num}}_of_{{suit}}"></li>
 </div>
 {% elif target == 'dealer' %}
 <div id="dealer-cards" hx-swap-oob="beforeend">

@@ -157,10 +157,8 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
             print(f'dealing card to {user} with id {user_id}')
             await self.deal_card(user, user_id)
             await self.deal_card(user, user_id)
-
         # deal a card to the dealer
         await self.dealer_card()
-
         # Publish dealing
         context = {'type': 'dealing'}
         html = render_to_string('blackjack/game_message.html', context)
@@ -177,10 +175,8 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
             stood_count = await self.redis.scard(f'{self.room_channel}_stood')
             player_count = await self.redis.scard(f'{self.room_channel}_active_players')
             print(f'stood_count : {stood_count}, players in hand : {player_count}')
-
             if (stood_count == player_count):
                 break
-
             await asyncio.sleep(1)
 
     async def dealer_action(self):
@@ -230,6 +226,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                 payout = int(bjplayer.curr_bet) * 2
                 bjplayer.chips += payout
                 await self.save_DBObject(bjplayer)
+        await self.redis.publish(self.room_channel, json.dumps({'type': 'info_change'}))
 
     async def reset(self):
         '''remove all bets & hands'''
@@ -306,23 +303,12 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         await self.save_DBObject(player)
         # register player as in the hand
         await self.redis.sadd(f'{self.room_channel}_active_players',
-                              self.user_id)
+                              user.id)
         # save bet amount
         await self.redis.sadd(f'{self.room_channel}_bets', int(bet))
         # update frontend player chips
-        context = {
-            'name': user.username,
-            'chips': player.chips,
-            'user': user
-        }
-        html = render_to_string('blackjack/player.html', context)
-        await self.channel_layer.send(
-            self.channel_name,
-            {
-                'type': 'html_message',
-                'html': html
-            }
-        )
+        await self.redis.publish(self.room_channel, json.dumps({'type': 'info_change'}))
+        await self.send_player_info(user.id)
 
     async def handle_hit(self, username):
         '''handle a player hitting'''
@@ -371,12 +357,10 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         ordered_ids = list(user_ids)
         ordered_ids.remove(user)
         ordered_ids.insert(0, user)
-
         seat_map = {}
         # start at 1,2,3
         for idx, user_id in enumerate(ordered_ids):
             seat_map[user_id] = f'player{idx+1}'
-
         print(seat_map)
         return seat_map
 
@@ -388,13 +372,15 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                     message = await self.pubsub.get_message(ignore_subscribe_messages=True)
                     if message:
                         decoded_message = json.loads(message['data'].decode('utf-8'))
-
                         if 'type' in decoded_message and (decoded_message.get('type') == 'player_joined' or decoded_message.get('type') == 'player_left'):
                             print("new player joined")
                             user_ids = await self.redis.smembers(f'{self.room_channel}_players')
                             self.seats = self.calculate_seat_map(self.user_id, user_ids)
                             await self.redis.hset(f'{self.room_channel}_seats', self.user_id, json.dumps(self.seats))
+                            await self.send_player_info(self.user_id)
                             print("calculated seat map")
+                        elif 'type' in decoded_message and decoded_message.get('type') == 'info_change':
+                            await self.send_player_info(self.user_id)
                         elif 'html' in decoded_message:
                             await self.send(text_data=decoded_message['html'])
                     await asyncio.sleep(0.1)  # prevent tight loop -> Allows cancelation
@@ -406,7 +392,6 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                     await asyncio.sleep(0.1)
         except asyncio.CancelledError:
             print("Listen task clean up")
-
 
     async def game_message(self, event):
         '''send message to websocket'''
@@ -455,6 +440,47 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                     'html': html
                 }
             )
+
+    async def send_player_info(self, user_id):
+        print(f"EVALUATING INFO FOR {user_id}:")
+        seats = await self.get_seat_map(user_id)
+        print(f"retrieved seatmap: {seats}")
+        uchannel = await self.redis.hget('user_channel_map', user_id)
+        for id, target in seats.items():
+            print(f'sending info of {id} to {target}')
+            user = await self.get_UserObject(id=id)
+            print(f'retrieved {user} from seatmap')
+            player = await self.get_BlackjackPlayer(user=user)
+            if target == 'player1':
+                context = {
+                    'name': user.username,
+                    'chips': player.chips,
+                    'user': user
+                }
+                html = render_to_string('blackjack/player.html', context)
+                await self.channel_layer.send(
+                    uchannel.decode('utf-8'),
+                    {
+                        'type': 'html_message',
+                        'html': html
+                    }
+                )
+            else:
+                print(f"send {user} to {target} seat")
+                context = {
+                    'seat': target,
+                    'name': user.username,
+                    'chips': player.chips,
+                }
+                html = render_to_string('blackjack/seat.html', context)
+                await self.channel_layer.send(
+                    uchannel.decode('utf-8'),
+                    {
+                        'type': 'html_message',
+                        'html': html
+                    }
+                )
+
 
     async def get_card(self):  # async because we need to save the room
         deck_dict = json.loads(self.room.deck)

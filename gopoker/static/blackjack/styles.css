@@ -129,6 +129,8 @@ h2 {
 #player2-cards {
   grid-row: 3 / 3;
   grid-column: 2 / 2;
+  list-style-type: none;
+  width: 100px;
 }
 
 #player3 {
@@ -146,6 +148,8 @@ h2 {
 #player3-cards {
   grid-row: 3 / 3;
   grid-column: 4 / 4;
+  list-style-type: none;
+  width: 100px;
 }
 
 
@@ -173,6 +177,15 @@ h2 {
   position: relative;
   height: 100px;
   width: 80px;
+  padding: 5px;
+  margin: 5px;
+  animation: fall 0.5s ease-out
+}
+
+.minicard {
+  position: relative;
+  height: 30px;
+  width: 25px;
   padding: 5px;
   margin: 5px;
   animation: fall 0.5s ease-out
@@ -244,3 +257,63 @@ h2 {
 .Jack_of_Diamonds {background:url(../cards/Jack_of_Diamonds.png)no-repeat center / cover}
 .Queen_of_Diamonds {background:url(../cards/Queen_of_Diamonds.png)no-repeat center / cover}
 .King_of_Diamonds {background:url(../cards/King_of_Diamonds.png)no-repeat center / cover}
+
+/* Mini cards */
+
+.Mini_Ace_of_Spades {background:url(../cards/Ace_of_Spades_Mini.png)no-repeat center  / cover}
+.Mini_Two_of_Spades {background:url(../cards/Two_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Three_of_Spades {background:url(../cards/Three_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Four_of_Spades {background:url(../cards/Four_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Five_of_Spades {background:url(../cards/Five_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Six_of_Spades {background:url(../cards/Six_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Seven_of_Spades {background:url(../cards/Seven_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Eight_of_Spades {background:url(../cards/Eight_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Nine_of_Spades {background:url(../cards/Nine_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Ten_of_Spades {background:url(../cards/Ten_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Jack_of_Spades {background:url(../cards/Jack_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_Queen_of_Spades {background:url(../cards/Queen_of_Spades_Mini.png)no-repeat center / cover}
+.Mini_King_of_Spades {background:url(../cards/King_of_Spades_Mini.png)no-repeat center / cover}
+
+.Mini_Ace_of_Hearts {background:url(../cards/Ace_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Two_of_Hearts {background:url(../cards/Two_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Three_of_Hearts {background:url(../cards/Three_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Four_of_Hearts {background:url(../cards/Four_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Five_of_Hearts {background:url(../cards/Five_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Six_of_Hearts {background:url(../cards/Six_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Seven_of_Hearts {background:url(../cards/Seven_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Eight_of_Hearts {background:url(../cards/Eight_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Nine_of_Hearts {background:url(../cards/Nine_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Ten_of_Hearts { background:url(../cards/Ten_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Jack_of_Hearts {background:url(../cards/Jack_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_Queen_of_Hearts {background:url(../cards/Queen_of_Hearts_Mini.png)no-repeat center / cover}
+.Mini_King_of_Hearts {background:url(../cards/King_of_Hearts_Mini.png)no-repeat center / cover}
+
+.Mini_Ace_of_Clubs {background:url(../cards/Ace_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Two_of_Clubs {background:url(../cards/Two_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Three_of_Clubs {background:url(../cards/Three_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Four_of_Clubs {background:url(../cards/Four_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Five_of_Clubs {background:url(../cards/Five_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Six_of_Clubs {background:url(../cards/Six_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Seven_of_Clubs {background:url(../cards/Seven_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Eight_of_Clubs {background:url(../cards/Eight_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Nine_of_Clubs {background:url(../cards/Nine_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Ten_of_Clubs { background:url(../cards/Ten_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Jack_of_Clubs {background:url(../cards/Jack_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_Queen_of_Clubs {background:url(../cards/Queen_of_Clubs_Mini.png)no-repeat center / cover}
+.Mini_King_of_Clubs {background:url(../cards/King_of_Clubs_Mini.png)no-repeat center / cover}
+
+.Mini_Ace_of_Diamonds {background:url(../cards/Ace_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Two_of_Diamonds {background:url(../cards/Two_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Three_of_Diamonds {background:url(../cards/Three_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Four_of_Diamonds {background:url(../cards/Four_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Five_of_Diamonds {background:url(../cards/Five_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Six_of_Diamonds {background:url(../cards/Six_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Seven_of_Diamonds {background:url(../cards/Seven_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Eight_of_Diamonds {background:url(../cards/Eight_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Nine_of_Diamonds {background:url(../cards/Nine_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Ten_of_Diamonds { background:url(../cards/Ten_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Jack_of_Diamonds {background:url(../cards/Jack_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_Queen_of_Diamonds {background:url(../cards/Queen_of_Diamonds_Mini.png)no-repeat center / cover}
+.Mini_King_of_Diamonds {background:url(../cards/King_of_Diamonds_Mini.png)no-repeat center / cover}
+
+
