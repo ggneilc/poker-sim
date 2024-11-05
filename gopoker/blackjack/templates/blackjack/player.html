@@ -2,24 +2,26 @@
   <div class="player-info">
     {{name}} | {{chips}}
   </div>
-  <div>
-    <button hx-trigger="click"
-      ws-send=""
-      hx-vals='{
-        "type": "player_action",
-        "event_type": "hit", 
-        "user": "{{user}}"
-      }'> Hit </button>
-    <button hx-trigger="click"
-      ws-send=""
-      hx-vals='{
-        "type": "player_action",
-        "event_type": "stand", 
-        "user": "{{user}}"
-      }'> Stand </button>
+  <div class="action-container">
+    <div class="action-buttons">
+      <button id="hit" hx-trigger="click"
+        ws-send=""
+        hx-vals='{
+          "type": "player_action",
+          "event_type": "hit", 
+          "user": "{{user}}"
+        }'> Hit </button>
+      <button id="stand" hx-trigger="click"
+        ws-send=""
+        hx-vals='{
+          "type": "player_action",
+          "event_type": "stand", 
+          "user": "{{user}}"
+        }'> Stand </button>
+    </div>
     <div id="bet">
-      <input name="player-bet" placeholder="Enter Bet">
-      <button hx-trigger="click"
+      <input class="bet-input" name="player-bet" placeholder="Enter Bet">
+      <button id="betbtn" hx-trigger="click"
          hx-include="closest div"
          ws-send=""
          hx-vals='js:{

@@ -138,6 +138,8 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
             player_count = await self.redis.scard(f'{self.room_channel}_players')
             aplayer_count = await self.redis.scard(f'{self.room_channel}_active_players')
             bet_count = await self.redis.scard(f'{self.room_channel}_bets')
+            players = await self.redis.smembers(f'{self.room_channel}_active_players')
+            print(f"players in hand: {players}")
             print(f'bets: {bet_count} players: {player_count}')
             if player_count == bet_count and aplayer_count > 0 and player_count == aplayer_count:
                 break
@@ -185,7 +187,14 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         context = {'type': 'daction'}
         html = render_to_string('blackjack/game_message.html', context)
         await self.redis.publish(self.room_channel, json.dumps({'html': html}))
-        while self.room.dealer_score < 17:
+
+        players = await self.redis.scard(f'{self.room_channel}_active_players')
+
+        if (players != 0):
+            while self.room.dealer_score < 17:
+                await self.dealer_card()
+                await asyncio.sleep(3)
+        else:  # everyone busted
             await self.dealer_card()
             await asyncio.sleep(3)
 
@@ -308,7 +317,7 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
         await self.redis.sadd(f'{self.room_channel}_bets', int(bet))
         # update frontend player chips
         await self.redis.publish(self.room_channel, json.dumps({'type': 'info_change'}))
-        await self.send_player_info(user.id)
+        # await self.send_player_info(user.id)
 
     async def handle_hit(self, username):
         '''handle a player hitting'''
@@ -480,7 +489,6 @@ class BlackjackConsumer(AsyncWebsocketConsumer):
                         'html': html
                     }
                 )
-
 
     async def get_card(self):  # async because we need to save the room
         deck_dict = json.loads(self.room.deck)

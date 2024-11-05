@@ -1,7 +1,9 @@
 {% load static %}
 {% if seat == 'player2' %}
 <div id="player2" hx-swap-oob="true">
-  {{name}} | {{chips}}
+  <div id="pinfo">
+    {{name}} | {{chips}}
+  </div>
 </div>
 {% elif seat == 'player3' %}
 <div id="player3" hx-swap-oob="true">
